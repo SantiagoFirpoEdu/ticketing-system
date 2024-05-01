@@ -4,7 +4,7 @@ import com.firpy.application.commands.exceptions.CommandException;
 
 public class IntArgumentModel extends ArgumentModel
 {
-	public IntArgumentModel(String name, String description, boolean required)
+	public IntArgumentModel(String name, String description)
 	{
 		super(name, description);
 	}
