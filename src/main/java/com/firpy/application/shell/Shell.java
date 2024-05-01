@@ -9,6 +9,7 @@ import com.firpy.application.commands.impls.RegisterVisitorCommand;
 import com.firpy.model.MinorVisitor;
 import com.firpy.model.Visitor;
 import com.firpy.repositories.CrudRepository;
+import com.firpy.repositories.impls.MinorVisitorDataAccess;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
@@ -16,10 +17,10 @@ import java.util.Scanner;
 
 public class Shell
 {
-	public Shell(CrudRepository<MinorVisitor, Long> minorVisitorRepository, CrudRepository<Visitor, Long> visitorRepository)
+	public Shell(MinorVisitorDataAccess minorVisitorDataAccess, CrudRepository<Visitor, Long> visitorRepository)
 	{
 		commandRegistry.registerCommand(new RegisterVisitorCommand(visitorRepository));
-		commandRegistry.registerCommand(new RegisterMinorVisitorCommand(minorVisitorRepository));
+		commandRegistry.registerCommand(new RegisterMinorVisitorCommand(minorVisitorDataAccess));
 		commandRegistry.registerCommand(new ExitCommand());
 	}
 
