@@ -19,9 +19,9 @@ public class CrudRepository<EntityType extends Identifiable<IdType>, IdType>
 				       .toList();
 	}
 
-	public EntityType findById(IdType id)
+	public Optional<EntityType> findById(IdType id)
 	{
-		return entities.get(id);
+		return Optional.ofNullable(entities.get(id));
 	}
 
 	public void delete(IdType id)
