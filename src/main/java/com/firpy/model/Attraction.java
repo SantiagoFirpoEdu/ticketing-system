@@ -1,5 +1,12 @@
 package com.firpy.model;
 
-public record Attraction(long id, String name)
+import com.firpy.repositories.Identifiable;
+
+public record Attraction(long id, String name) implements Identifiable<Long>
 {
+    @Override
+    public Long getId()
+    {
+        return id;
+    }
 }
