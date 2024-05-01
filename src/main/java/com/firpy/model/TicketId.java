@@ -1,5 +1,5 @@
 package com.firpy.model;
 
-import java.util.Date;
-public record TicketId(Date purchaseDate, long dailyId)
+import java.time.LocalDate;
+public record TicketId(LocalDate purchaseDate, long dailyId)
 {}
