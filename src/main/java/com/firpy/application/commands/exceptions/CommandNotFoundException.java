@@ -7,8 +7,4 @@ public class CommandNotFoundException extends Exception
 		super(message);
 	}
 
-	public CommandNotFoundException(String message, Throwable cause)
-	{
-		super(message, cause);
-	}
 }

@@ -39,7 +39,7 @@ public abstract class Command implements PrettyPrintable
 		}
 	}
 
-	public String prettyPrint()
+	public @NotNull String prettyPrint()
 	{
 		StringBuilder builder = new StringBuilder();
         builder.append(ShellColors.YELLOW)

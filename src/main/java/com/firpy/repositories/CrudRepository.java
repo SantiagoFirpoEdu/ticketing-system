@@ -1,5 +1,7 @@
 package com.firpy.repositories;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
@@ -7,19 +9,19 @@ import java.util.function.Predicate;
 
 public class CrudRepository<EntityType extends Identifiable<IdType>, IdType>
 {
-	public void save(EntityType entity)
+	public void save(@NotNull EntityType entity)
 	{
 		entities.put(entity.getId(), entity);
 	}
 
-	public List<EntityType> findAll()
+	public @NotNull List<EntityType> findAll()
 	{
 		return entities.values()
 				       .stream()
 				       .toList();
 	}
 
-	public Optional<EntityType> findById(IdType id)
+	public @NotNull Optional<EntityType> findById(IdType id)
 	{
 		return Optional.ofNullable(entities.get(id));
 	}
@@ -29,7 +31,7 @@ public class CrudRepository<EntityType extends Identifiable<IdType>, IdType>
 		entities.remove(id);
 	}
 
-	public List<EntityType> findManyByPredicate(Predicate<EntityType> predicate)
+	public @NotNull List<EntityType> findManyByPredicate(Predicate<EntityType> predicate)
 	{
 		return entities.values()
 				       .stream()
@@ -37,7 +39,7 @@ public class CrudRepository<EntityType extends Identifiable<IdType>, IdType>
 				       .toList();
 	}
 
-	public Optional<EntityType> findFirstByPredicate(Predicate<EntityType> predicate)
+	public @NotNull Optional<EntityType> findFirstByPredicate(Predicate<EntityType> predicate)
 	{
 		return entities.values()
 				       .stream()

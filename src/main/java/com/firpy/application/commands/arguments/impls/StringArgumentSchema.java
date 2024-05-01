@@ -3,6 +3,7 @@ package com.firpy.application.commands.arguments.impls;
 import com.firpy.application.commands.Command;
 import com.firpy.application.commands.arguments.ArgumentSchema;
 import com.firpy.application.commands.exceptions.CommandUsageException;
+import org.jetbrains.annotations.NotNull;
 
 public class StringArgumentSchema extends ArgumentSchema
 {
@@ -12,7 +13,7 @@ public class StringArgumentSchema extends ArgumentSchema
 	}
 
 	@Override
-	public String parse(String[] args) throws CommandUsageException
+	public String parse(String @NotNull [] args) throws CommandUsageException
 	{
 		checkSize(args);
 		return args[getIndex()];

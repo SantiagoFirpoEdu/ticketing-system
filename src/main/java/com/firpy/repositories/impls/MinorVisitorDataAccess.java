@@ -4,6 +4,7 @@ import com.firpy.model.MinorVisitor;
 import com.firpy.model.Visitor;
 import com.firpy.repositories.CrudRepository;
 import com.firpy.repositories.exceptions.CheckedIllegalArgumentException;
+import org.jetbrains.annotations.NotNull;
 
 import java.time.LocalDate;
 import java.util.Optional;
@@ -16,7 +17,7 @@ public class MinorVisitorDataAccess
         this.minorVisitorRepository = minorVisitorRepository;
     }
 
-    public MinorVisitor registerMinorVisitor(String name, LocalDate dateOfBirth, Long guardianId) throws CheckedIllegalArgumentException
+    public @NotNull MinorVisitor registerMinorVisitor(String name, LocalDate dateOfBirth, Long guardianId) throws CheckedIllegalArgumentException
     {
         Optional<Visitor> guardian = visitorRepository.findById(guardianId);
 

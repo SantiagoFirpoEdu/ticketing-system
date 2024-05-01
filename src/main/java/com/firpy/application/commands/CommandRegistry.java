@@ -6,13 +6,14 @@ import com.firpy.application.commands.exceptions.CommandUsageException;
 import com.firpy.application.shell.PrettyPrintable;
 import com.firpy.application.shell.Shell;
 import com.firpy.application.shell.ShellColors;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 
 public class CommandRegistry implements PrettyPrintable
 {
 	@Override
-	public String prettyPrint()
+	public @NotNull String prettyPrint()
 	{
 		StringBuilder builder = new StringBuilder();
 		builder.append(ShellColors.YELLOW_BOLD + "Commands:\n" + ShellColors.RESET);
@@ -28,12 +29,12 @@ public class CommandRegistry implements PrettyPrintable
 		return builder.toString();
 	}
 
-	public void registerCommand(Command command)
+	public void registerCommand(@NotNull Command command)
 	{
 		commands.put(command.getName(), command);
 	}
 
-	public void run(String command, String[] args, Shell shell) throws CommandNotFoundException, CommandException, CommandUsageException
+	public void run(String command, String[] args, @NotNull Shell shell) throws CommandNotFoundException, CommandException, CommandUsageException
 	{
 		if (!commands.containsKey(command))
 		{

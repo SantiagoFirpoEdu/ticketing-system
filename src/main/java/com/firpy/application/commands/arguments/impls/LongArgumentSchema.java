@@ -4,6 +4,7 @@ import com.firpy.application.commands.Command;
 import com.firpy.application.commands.arguments.ArgumentSchema;
 import com.firpy.application.commands.exceptions.CommandException;
 import com.firpy.application.commands.exceptions.CommandUsageException;
+import org.jetbrains.annotations.NotNull;
 
 public class LongArgumentSchema extends ArgumentSchema
 {
@@ -13,7 +14,7 @@ public class LongArgumentSchema extends ArgumentSchema
     }
 
     @Override
-    public Long parse(String[] args) throws CommandException, CommandUsageException
+    public @NotNull Long parse(String @NotNull [] args) throws CommandException, CommandUsageException
     {
         checkSize(args);
         String arg = args[getIndex()];
