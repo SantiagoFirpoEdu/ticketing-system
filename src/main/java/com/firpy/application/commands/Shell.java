@@ -11,11 +11,21 @@ public class Shell
 	{
 		commandRegistry.registerCommand(new RegisterVisitorCommand());
 		commandRegistry.registerCommand(new RegisterMinorVisitorCommand());
+		commandRegistry.registerCommand(new ExitCommand());
+	}
+
+	public void exit()
+	{
+		shouldExit = true;
+	}
+
+	public void println(String message)
+	{
+		System.out.println(message);
 	}
 
 	public void waitForInput()
 	{
-		boolean shouldExit = false;
 		while (!shouldExit)
 		{
 			System.out.print(">> ");
@@ -54,4 +64,5 @@ public class Shell
 	}
 
 	private final CommandRegistry commandRegistry = new CommandRegistry();
+	private boolean shouldExit = false;
 }
