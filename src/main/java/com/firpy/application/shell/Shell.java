@@ -3,6 +3,7 @@ package com.firpy.application.shell;
 import com.firpy.application.commands.*;
 import com.firpy.application.commands.exceptions.CommandException;
 import com.firpy.application.commands.exceptions.CommandNotFoundException;
+import com.firpy.application.commands.exceptions.CommandUsageException;
 import com.firpy.application.commands.impls.ExitCommand;
 import com.firpy.application.commands.impls.RegisterMinorVisitorCommand;
 import com.firpy.application.commands.impls.RegisterVisitorCommand;
@@ -67,11 +68,11 @@ public class Shell
 		{
 			System.out.printf(ShellColors.RED + "%nCommand not found: %s%n", e.getMessage() + ShellColors.RESET);
 		}
-		catch (CommandException e)
+		catch (CommandException | CommandUsageException e)
 		{
 			System.out.printf(ShellColors.RED + "%nError running command: %s%n", e.getMessage() + ShellColors.RESET);
 		}
-	}
+    }
 
 	private final CommandRegistry commandRegistry = new CommandRegistry();
 	private boolean shouldExit = false;

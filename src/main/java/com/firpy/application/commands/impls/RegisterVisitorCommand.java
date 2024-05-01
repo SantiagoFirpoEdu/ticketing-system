@@ -2,7 +2,7 @@ package com.firpy.application.commands.impls;
 
 import com.firpy.application.commands.Command;
 import com.firpy.application.commands.arguments.impls.StringArgumentSchema;
-import com.firpy.application.commands.exceptions.CommandException;
+import com.firpy.application.commands.exceptions.CommandUsageException;
 import com.firpy.application.shell.Shell;
 import com.firpy.model.Visitor;
 import com.firpy.repositories.CrudRepository;
@@ -20,7 +20,7 @@ public class RegisterVisitorCommand extends Command
 	}
 
 	@Override
-	public void run(String @NotNull [] args, @NotNull Shell shell) throws CommandException
+	public void run(String @NotNull [] args, @NotNull Shell shell) throws CommandUsageException
 	{
 		String name = nameArgument.parse(args);
 		String phoneNumberValue = phoneNumber.parse(args);

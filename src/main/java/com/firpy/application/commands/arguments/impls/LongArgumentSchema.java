@@ -3,6 +3,7 @@ package com.firpy.application.commands.arguments.impls;
 import com.firpy.application.commands.Command;
 import com.firpy.application.commands.arguments.ArgumentSchema;
 import com.firpy.application.commands.exceptions.CommandException;
+import com.firpy.application.commands.exceptions.CommandUsageException;
 
 public class LongArgumentSchema extends ArgumentSchema
 {
@@ -12,7 +13,7 @@ public class LongArgumentSchema extends ArgumentSchema
     }
 
     @Override
-    public Long parse(String[] args) throws CommandException
+    public Long parse(String[] args) throws CommandException, CommandUsageException
     {
         checkSize(args);
         String arg = args[getIndex()];
@@ -22,7 +23,7 @@ public class LongArgumentSchema extends ArgumentSchema
         }
         catch (NumberFormatException e)
         {
-            throw new CommandException("Invalid long format: %s".formatted(arg));
+            throw new CommandUsageException("Invalid long format: %s".formatted(arg), getCommand());
         }
     }
 }

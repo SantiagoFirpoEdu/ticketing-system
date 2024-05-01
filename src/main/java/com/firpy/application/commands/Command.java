@@ -2,6 +2,7 @@ package com.firpy.application.commands;
 
 import com.firpy.application.commands.arguments.ArgumentSchema;
 import com.firpy.application.commands.exceptions.CommandException;
+import com.firpy.application.commands.exceptions.CommandUsageException;
 import com.firpy.application.shell.PrettyPrintable;
 import com.firpy.application.shell.Shell;
 import com.firpy.application.shell.ShellColors;
@@ -66,7 +67,7 @@ public abstract class Command implements PrettyPrintable
         return "%s %s".formatted(name, argumentSchemas.stream().map(argumentSchema -> "<%s>".formatted(argumentSchema.getName())).collect(Collectors.joining(" ")));
 	}
 
-	public abstract void run(@NotNull String[] args, @NotNull Shell shell) throws CommandException;
+	public abstract void run(@NotNull String[] args, @NotNull Shell shell) throws CommandException, CommandUsageException;
 
 	private final List<ArgumentSchema> argumentSchemas = new ArrayList<>();
 	private final String name;

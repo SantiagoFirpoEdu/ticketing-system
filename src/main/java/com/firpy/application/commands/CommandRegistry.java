@@ -2,6 +2,7 @@ package com.firpy.application.commands;
 
 import com.firpy.application.commands.exceptions.CommandException;
 import com.firpy.application.commands.exceptions.CommandNotFoundException;
+import com.firpy.application.commands.exceptions.CommandUsageException;
 import com.firpy.application.shell.PrettyPrintable;
 import com.firpy.application.shell.Shell;
 import com.firpy.application.shell.ShellColors;
@@ -32,7 +33,7 @@ public class CommandRegistry implements PrettyPrintable
 		commands.put(command.getName(), command);
 	}
 
-	public void run(String command, String[] args, Shell shell) throws CommandNotFoundException, CommandException
+	public void run(String command, String[] args, Shell shell) throws CommandNotFoundException, CommandException, CommandUsageException
 	{
 		if (!commands.containsKey(command))
 		{

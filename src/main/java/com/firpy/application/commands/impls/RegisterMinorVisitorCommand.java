@@ -5,6 +5,7 @@ import com.firpy.application.commands.arguments.impls.LocalDateArgumentSchema;
 import com.firpy.application.commands.arguments.impls.LongArgumentSchema;
 import com.firpy.application.commands.arguments.impls.StringArgumentSchema;
 import com.firpy.application.commands.exceptions.CommandException;
+import com.firpy.application.commands.exceptions.CommandUsageException;
 import com.firpy.application.shell.Shell;
 import com.firpy.model.MinorVisitor;
 import com.firpy.repositories.exceptions.CheckedIllegalArgumentException;
@@ -23,7 +24,7 @@ public class RegisterMinorVisitorCommand extends Command
 	}
 
 	@Override
-	public void run(String @NotNull [] args, @NotNull Shell shell) throws CommandException
+	public void run(String @NotNull [] args, @NotNull Shell shell) throws CommandException, CommandUsageException
 	{
 		String name = nameArgument.parse(args);
 		Long guardianId = guardianIdArgument.parse(args);

@@ -3,6 +3,7 @@ package com.firpy.application.commands.arguments.impls;
 import com.firpy.application.commands.Command;
 import com.firpy.application.commands.arguments.ArgumentSchema;
 import com.firpy.application.commands.exceptions.CommandException;
+import com.firpy.application.commands.exceptions.CommandUsageException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -16,7 +17,7 @@ public class LocalDateArgumentSchema extends ArgumentSchema
     }
 
     @Override
-    public LocalDate parse(String[] args) throws CommandException
+    public LocalDate parse(String[] args) throws CommandUsageException
     {
         checkSize(args);
         String arg = args[getIndex()];
@@ -26,7 +27,7 @@ public class LocalDateArgumentSchema extends ArgumentSchema
         }
         catch (DateTimeParseException e)
         {
-            throw new CommandException("Invalid date format: %s".formatted(arg));
+            throw new CommandUsageException("Invalid date format: %s".formatted(arg), getCommand());
         }
     }
 
