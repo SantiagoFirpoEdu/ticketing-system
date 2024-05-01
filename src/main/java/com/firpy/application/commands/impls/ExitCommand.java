@@ -1,5 +1,6 @@
-package com.firpy.application.commands;
+package com.firpy.application.commands.impls;
 
+import com.firpy.application.commands.Command;
 import com.firpy.application.shell.Shell;
 import org.jetbrains.annotations.NotNull;
 

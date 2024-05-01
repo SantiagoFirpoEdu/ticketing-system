@@ -1,6 +1,7 @@
-package com.firpy.application.commands;
+package com.firpy.application.commands.impls;
 
-import com.firpy.application.commands.arguments.StringArgumentModel;
+import com.firpy.application.commands.Command;
+import com.firpy.application.commands.arguments.impls.StringArgumentModel;
 import com.firpy.application.commands.exceptions.CommandException;
 import com.firpy.application.shell.Shell;
 import com.firpy.model.Visitor;

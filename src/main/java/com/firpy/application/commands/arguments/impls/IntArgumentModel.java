@@ -1,5 +1,6 @@
-package com.firpy.application.commands.arguments;
+package com.firpy.application.commands.arguments.impls;
 
+import com.firpy.application.commands.arguments.ArgumentModel;
 import com.firpy.application.commands.exceptions.CommandException;
 
 public class IntArgumentModel extends ArgumentModel

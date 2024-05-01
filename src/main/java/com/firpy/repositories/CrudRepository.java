@@ -12,6 +12,13 @@ public class CrudRepository<EntityType extends Identifiable<IdType>, IdType>
 		entities.put(entity.getId(), entity);
 	}
 
+	public List<EntityType> findAll()
+	{
+		return entities.values()
+				       .stream()
+				       .toList();
+	}
+
 	public EntityType findById(IdType id)
 	{
 		return entities.get(id);

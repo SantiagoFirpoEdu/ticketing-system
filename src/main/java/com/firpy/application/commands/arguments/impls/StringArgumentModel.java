@@ -1,4 +1,6 @@
-package com.firpy.application.commands.arguments;
+package com.firpy.application.commands.arguments.impls;
+
+import com.firpy.application.commands.arguments.ArgumentModel;
 
 public class StringArgumentModel extends ArgumentModel
 {
