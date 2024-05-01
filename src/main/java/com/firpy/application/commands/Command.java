@@ -54,12 +54,16 @@ public abstract class Command implements PrettyPrintable
 			   .append("Usage: ")
 			   .append(name)
 			   .append(" ")
-			   .append(argumentModels.stream().map(argumentModel -> "<%s>".formatted(argumentModel.getName())).collect(Collectors.joining(" ")))
-			   .append('\n')
-			   .append('\n')
-			   .append("Arguments:\n")
-			   .append(argumentModels.stream().map(ArgumentModel::prettyPrint).collect(Collectors.joining("\n")));
+			   .append(argumentModels.stream().map(argumentModel -> "<%s>".formatted(argumentModel.getName())).collect(Collectors.joining(" ")));
 
+
+		if (!argumentModels.isEmpty())
+		{
+			builder.append('\n')
+				   .append('\n')
+				   .append("Arguments:\n")
+				   .append(argumentModels.stream().map(ArgumentModel::prettyPrint).collect(Collectors.joining("\n")));
+		}
 		return builder.toString();
 	}
 
