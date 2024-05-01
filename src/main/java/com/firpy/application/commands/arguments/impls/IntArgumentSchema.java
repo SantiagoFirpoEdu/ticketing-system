@@ -1,18 +1,20 @@
 package com.firpy.application.commands.arguments.impls;
 
-import com.firpy.application.commands.arguments.ArgumentModel;
+import com.firpy.application.commands.arguments.ArgumentSchema;
 import com.firpy.application.commands.exceptions.CommandException;
 
-public class IntArgumentModel extends ArgumentModel
+public class IntArgumentSchema extends ArgumentSchema
 {
-	public IntArgumentModel(String name, String description)
+	public IntArgumentSchema(String name, String description)
 	{
 		super(name, description);
 	}
 
 	@Override
-	public Integer parse(String arg) throws CommandException
+	public Integer parse(String[] args) throws CommandException
 	{
+		checkSize(args);
+		String arg = args[getIndex()];
 		try
 		{
 			return Integer.parseInt(arg);
@@ -22,4 +24,5 @@ public class IntArgumentModel extends ArgumentModel
 			throw new CommandException("Invalid integer: %s".formatted(arg));
 		}
 	}
+
 }
