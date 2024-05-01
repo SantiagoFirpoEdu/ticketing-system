@@ -57,7 +57,6 @@ public abstract class Command implements PrettyPrintable
 		if (!argumentSchemas.isEmpty())
 		{
 			builder.append('\n')
-				   .append('\n')
 				   .append(ShellColors.CYAN_BOLD + "Arguments:\n" + ShellColors.RESET)
 				   .append(argumentSchemas.stream().map(ArgumentSchema::prettyPrint).collect(Collectors.joining("\n")));
 		}

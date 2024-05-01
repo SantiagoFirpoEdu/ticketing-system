@@ -18,9 +18,8 @@ public class CommandRegistry implements PrettyPrintable
 		for (Command command : commands.values())
 		{
 			builder.append(command.prettyPrint());
-			builder.append("\n");
-			builder.append("\n");
-			builder.append("\n");
+			builder.append('\n');
+			builder.append('\n');
 		}
 
 		builder.delete(builder.length() - 2, builder.length());
