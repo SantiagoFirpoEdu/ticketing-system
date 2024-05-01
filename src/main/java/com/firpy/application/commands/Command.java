@@ -49,10 +49,7 @@ public abstract class Command implements PrettyPrintable
 			   .append(ShellColors.BLUE_BRIGHT)
 			   .append("Usage: ")
 			   .append(ShellColors.RESET)
-			   .append(name)
-			   .append(" ")
-			   .append(argumentSchemas.stream().map(argumentSchema -> "<%s>".formatted(argumentSchema.getName())).collect(Collectors.joining(" ")));
-
+			   .append(usage());
 
 		if (!argumentSchemas.isEmpty())
 		{
@@ -61,6 +58,12 @@ public abstract class Command implements PrettyPrintable
 				   .append(argumentSchemas.stream().map(ArgumentSchema::prettyPrint).collect(Collectors.joining("\n")));
 		}
 		return builder.toString();
+	}
+
+	public String usage()
+	{
+
+        return "%s %s".formatted(name, argumentSchemas.stream().map(argumentSchema -> "<%s>".formatted(argumentSchema.getName())).collect(Collectors.joining(" ")));
 	}
 
 	public abstract void run(@NotNull String[] args, @NotNull Shell shell) throws CommandException;

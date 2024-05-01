@@ -1,13 +1,14 @@
 package com.firpy.application.commands.arguments.impls;
 
+import com.firpy.application.commands.Command;
 import com.firpy.application.commands.arguments.ArgumentSchema;
 import com.firpy.application.commands.exceptions.CommandException;
 
 public class StringArgumentSchema extends ArgumentSchema
 {
-	public StringArgumentSchema(String name, String description)
+	public StringArgumentSchema(String name, String description, Command command)
 	{
-		super(name, description);
+		super(name, description, command);
 	}
 
 	@Override

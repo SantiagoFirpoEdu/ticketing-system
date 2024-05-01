@@ -39,8 +39,8 @@ public class RegisterMinorVisitorCommand extends Command
         }
     }
 
-	private final StringArgumentSchema nameArgument = new StringArgumentSchema("name", "The name of the minor visitor");
-	private final LongArgumentSchema guardianIdArgument = new LongArgumentSchema("guardian-id", "The id of the minor visitor's guardian");
-	private final LocalDateArgumentSchema dateOfBirthArgument = new LocalDateArgumentSchema("date-of-birth", "The date of birth of the minor visitor");
+	private final StringArgumentSchema nameArgument = new StringArgumentSchema("name", "The name of the minor visitor", this);
+	private final LongArgumentSchema guardianIdArgument = new LongArgumentSchema("guardian-id", "The id of the minor visitor's guardian", this);
+	private final LocalDateArgumentSchema dateOfBirthArgument = new LocalDateArgumentSchema("date-of-birth", "The date of birth of the minor visitor", this);
 	private final MinorVisitorDataAccess minorVisitorDataAccess;
 }

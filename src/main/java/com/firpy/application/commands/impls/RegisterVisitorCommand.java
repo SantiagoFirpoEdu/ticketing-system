@@ -30,7 +30,7 @@ public class RegisterVisitorCommand extends Command
 		shell.println("Visitor registered successfully: %s".formatted(visitor));
 	}
 
-	private final StringArgumentSchema nameArgument = new StringArgumentSchema("name", "The name of the visitor");
-	private final StringArgumentSchema phoneNumber = new StringArgumentSchema("phoneNumber", "The phone number of the visitor");
+	private final StringArgumentSchema nameArgument = new StringArgumentSchema("name", "The name of the visitor", this);
+	private final StringArgumentSchema phoneNumber = new StringArgumentSchema("phoneNumber", "The phone number of the visitor", this);
 	private final CrudRepository<Visitor, Long> repository;
 }

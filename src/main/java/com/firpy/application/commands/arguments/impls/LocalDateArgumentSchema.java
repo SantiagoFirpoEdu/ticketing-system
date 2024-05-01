@@ -1,5 +1,6 @@
 package com.firpy.application.commands.arguments.impls;
 
+import com.firpy.application.commands.Command;
 import com.firpy.application.commands.arguments.ArgumentSchema;
 import com.firpy.application.commands.exceptions.CommandException;
 
@@ -9,9 +10,9 @@ import java.time.format.DateTimeParseException;
 
 public class LocalDateArgumentSchema extends ArgumentSchema
 {
-    public LocalDateArgumentSchema(String name, String description)
+    public LocalDateArgumentSchema(String name, String description, Command command)
     {
-        super(name, "%s. Format is %s".formatted(description, DATE_PATTERN));
+        super(name, "%s. Format is %s".formatted(description, DATE_PATTERN), command);
     }
 
     @Override
