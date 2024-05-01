@@ -1,5 +1,6 @@
 package com.firpy.application.shell;
 
+//From https://stackoverflow.com/questions/5762491/how-to-print-color-in-console-using-system-out-println
 public class ShellColors
 {
 	// Reset
@@ -74,4 +75,6 @@ public class ShellColors
 	public static final String PURPLE_BACKGROUND_BRIGHT = "\033[0;105m"; // PURPLE
 	public static final String CYAN_BACKGROUND_BRIGHT = "\033[0;106m";  // CYAN
 	public static final String WHITE_BACKGROUND_BRIGHT = "\033[0;107m";   // WHITE
+
+	private ShellColors() {}
 }
