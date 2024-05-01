@@ -1,4 +1,8 @@
-package com.firpy.application.commands;
+package com.firpy.application.commands.arguments;
+
+import com.firpy.application.commands.exceptions.CommandException;
+import com.firpy.application.shell.PrettyPrintable;
+import com.firpy.application.shell.ShellColors;
 
 public abstract class ArgumentModel implements PrettyPrintable
 {
@@ -11,7 +15,7 @@ public abstract class ArgumentModel implements PrettyPrintable
 	@Override
 	public String prettyPrint()
 	{
-		return "%s: %s".formatted(name, description);
+		return "%s%s:%s %s".formatted(ShellColors.GREEN, name, ShellColors.RESET, description);
 	}
 
 	public String getName()

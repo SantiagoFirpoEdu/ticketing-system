@@ -1,4 +1,4 @@
-package com.firpy.application.commands;
+package com.firpy.application.commands.exceptions;
 
 public class CommandException extends Exception
 {

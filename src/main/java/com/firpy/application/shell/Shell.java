@@ -1,5 +1,8 @@
-package com.firpy.application.commands;
+package com.firpy.application.shell;
 
+import com.firpy.application.commands.*;
+import com.firpy.application.commands.exceptions.CommandException;
+import com.firpy.application.commands.exceptions.CommandNotFoundException;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
@@ -55,11 +58,11 @@ public class Shell
 		}
 		catch (CommandNotFoundException e)
 		{
-			System.err.printf("Command not found: %s%n", e.getMessage());
+			System.out.printf(ShellColors.RED + "%nCommand not found: %s%n", e.getMessage() + ShellColors.RESET);
 		}
 		catch (CommandException e)
 		{
-			System.err.printf("Error running command: %s%n", e.getMessage());
+			System.out.printf(ShellColors.RED + "%nError running command: %s%n", e.getMessage() + ShellColors.RESET);
 		}
 	}
 

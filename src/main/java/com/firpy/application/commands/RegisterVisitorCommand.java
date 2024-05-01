@@ -1,5 +1,8 @@
 package com.firpy.application.commands;
 
+import com.firpy.application.commands.arguments.StringArgumentModel;
+import com.firpy.application.commands.exceptions.CommandException;
+import com.firpy.application.shell.Shell;
 import org.jetbrains.annotations.NotNull;
 
 public class RegisterVisitorCommand extends Command
@@ -17,6 +20,7 @@ public class RegisterVisitorCommand extends Command
 		{
 			throw new CommandException("Invalid number of arguments.");
 		}
+
 		String name = nameArgument.parse(args[0]);
 		String phoneNumberValue = phoneNumber.parse(args[1]);
 	}

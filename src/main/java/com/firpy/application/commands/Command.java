@@ -1,5 +1,10 @@
 package com.firpy.application.commands;
 
+import com.firpy.application.commands.arguments.ArgumentModel;
+import com.firpy.application.commands.exceptions.CommandException;
+import com.firpy.application.shell.PrettyPrintable;
+import com.firpy.application.shell.Shell;
+import com.firpy.application.shell.ShellColors;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -47,11 +52,11 @@ public abstract class Command implements PrettyPrintable
 	public String prettyPrint()
 	{
 		StringBuilder builder = new StringBuilder();
-		builder.append(name)
-			   .append(": ")
+		builder.append(ShellColors.YELLOW + name)
+			   .append(": " + ShellColors.RESET)
 			   .append(description)
 			   .append('\n')
-			   .append("Usage: ")
+			   .append(ShellColors.BLUE_BRIGHT + "Usage: " + ShellColors.RESET)
 			   .append(name)
 			   .append(" ")
 			   .append(argumentModels.stream().map(argumentModel -> "<%s>".formatted(argumentModel.getName())).collect(Collectors.joining(" ")));
@@ -61,7 +66,7 @@ public abstract class Command implements PrettyPrintable
 		{
 			builder.append('\n')
 				   .append('\n')
-				   .append("Arguments:\n")
+				   .append(ShellColors.CYAN_BOLD + "Arguments:\n" + ShellColors.RESET)
 				   .append(argumentModels.stream().map(ArgumentModel::prettyPrint).collect(Collectors.joining("\n")));
 		}
 		return builder.toString();

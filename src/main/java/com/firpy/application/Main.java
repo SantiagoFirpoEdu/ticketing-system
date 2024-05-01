@@ -1,6 +1,6 @@
 package com.firpy.application;
 
-import com.firpy.application.commands.Shell;
+import com.firpy.application.shell.Shell;
 
 public class Main
 {

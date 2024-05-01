@@ -1,4 +1,4 @@
-package com.firpy.application.commands;
+package com.firpy.application.shell;
 
 public interface PrettyPrintable
 {
