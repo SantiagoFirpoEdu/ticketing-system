@@ -3,6 +3,9 @@ package com.firpy.application.shell;
 import com.firpy.application.commands.*;
 import com.firpy.application.commands.exceptions.CommandException;
 import com.firpy.application.commands.exceptions.CommandNotFoundException;
+import com.firpy.model.MinorVisitor;
+import com.firpy.model.Visitor;
+import com.firpy.repositories.CrudRepository;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
@@ -10,10 +13,10 @@ import java.util.Scanner;
 
 public class Shell
 {
-	public Shell()
+	public Shell(CrudRepository<MinorVisitor, Long> minorVisitorRepository, CrudRepository<Visitor, Long> visitorRepository)
 	{
-		commandRegistry.registerCommand(new RegisterVisitorCommand());
-		commandRegistry.registerCommand(new RegisterMinorVisitorCommand());
+		commandRegistry.registerCommand(new RegisterVisitorCommand(visitorRepository));
+		commandRegistry.registerCommand(new RegisterMinorVisitorCommand(minorVisitorRepository));
 		commandRegistry.registerCommand(new ExitCommand());
 	}
 

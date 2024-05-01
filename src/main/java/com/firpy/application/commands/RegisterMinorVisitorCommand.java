@@ -3,13 +3,16 @@ package com.firpy.application.commands;
 import com.firpy.application.commands.arguments.StringArgumentModel;
 import com.firpy.application.commands.exceptions.CommandException;
 import com.firpy.application.shell.Shell;
+import com.firpy.model.MinorVisitor;
+import com.firpy.repositories.CrudRepository;
 import org.jetbrains.annotations.NotNull;
 
 public class RegisterMinorVisitorCommand extends Command
 {
-	public RegisterMinorVisitorCommand()
+	public RegisterMinorVisitorCommand(CrudRepository<MinorVisitor, Long> repository)
 	{
 		super("register-minor-visitor", "Registers a minor visitor to the system.");
+		this.repository = repository;
 		addArgumentModels(nameArgument);
 	}
 
@@ -23,5 +26,6 @@ public class RegisterMinorVisitorCommand extends Command
 		String name = nameArgument.parse(args[0]);
 	}
 
-	private StringArgumentModel nameArgument = new StringArgumentModel("name", "The name of the visitor");
+	private final StringArgumentModel nameArgument = new StringArgumentModel("name", "The name of the visitor");
+	private final CrudRepository<MinorVisitor, Long> repository;
 }

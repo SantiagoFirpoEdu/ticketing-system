@@ -5,11 +5,11 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
 
-public class CrudRepository<EntityType, IdType>
+public class CrudRepository<EntityType extends Identifiable<IdType>, IdType>
 {
-	public void save(IdType id, EntityType entity)
+	public void save(EntityType entity)
 	{
-		entities.put(id, entity);
+		entities.put(entity.getId(), entity);
 	}
 
 	public EntityType findById(IdType id)
