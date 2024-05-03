@@ -5,6 +5,7 @@ import com.firpy.application.commands.exceptions.CommandException;
 import com.firpy.application.commands.exceptions.CommandNotFoundException;
 import com.firpy.application.commands.exceptions.CommandUsageException;
 import com.firpy.application.commands.impls.ExitCommand;
+import com.firpy.application.commands.impls.ListVisitors;
 import com.firpy.application.commands.impls.RegisterMinorVisitorCommand;
 import com.firpy.application.commands.impls.RegisterVisitorCommand;
 import com.firpy.repositories.impls.VisitorDataAccess;
@@ -19,6 +20,7 @@ public class Shell
 	{
 		commandRegistry.registerCommand(new RegisterVisitorCommand(visitorDataAccess));
 		commandRegistry.registerCommand(new RegisterMinorVisitorCommand(visitorDataAccess));
+		commandRegistry.registerCommand(new ListVisitors(visitorDataAccess));
 		commandRegistry.registerCommand(new ExitCommand());
 	}
 
