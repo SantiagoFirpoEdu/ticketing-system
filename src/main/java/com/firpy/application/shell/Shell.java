@@ -4,10 +4,7 @@ import com.firpy.application.commands.*;
 import com.firpy.application.commands.exceptions.CommandException;
 import com.firpy.application.commands.exceptions.CommandNotFoundException;
 import com.firpy.application.commands.exceptions.CommandUsageException;
-import com.firpy.application.commands.impls.ExitCommand;
-import com.firpy.application.commands.impls.ListVisitors;
-import com.firpy.application.commands.impls.RegisterMinorVisitorCommand;
-import com.firpy.application.commands.impls.RegisterVisitorCommand;
+import com.firpy.application.commands.impls.*;
 import com.firpy.repositories.impls.VisitorDataAccess;
 import org.jetbrains.annotations.NotNull;
 
@@ -22,6 +19,7 @@ public class Shell
 		commandRegistry.registerCommand(new RegisterMinorVisitorCommand(visitorDataAccess));
 		commandRegistry.registerCommand(new ListVisitors(visitorDataAccess));
 		commandRegistry.registerCommand(new ExitCommand());
+		commandRegistry.registerCommand(new HelpCommand());
 	}
 
 	public void exit()
@@ -32,6 +30,11 @@ public class Shell
 	public void println(String message)
 	{
 		System.out.println(message);
+	}
+
+	public void println()
+	{
+		System.out.println();
 	}
 
 	public void waitForInput()
