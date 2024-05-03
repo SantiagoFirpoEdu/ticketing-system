@@ -3,6 +3,7 @@ package com.firpy.application;
 import com.firpy.application.shell.Shell;
 import com.firpy.model.*;
 import com.firpy.repositories.CrudRepository;
+import com.firpy.repositories.CrudValueRepository;
 import com.firpy.repositories.impls.VisitorDataAccess;
 
 public class Main
@@ -13,6 +14,8 @@ public class Main
         CrudRepository<AdultVisitor, Long> visitorRepository = new CrudRepository<>();
         CrudRepository<Attraction, Long> attractionRepository = new CrudRepository<>();
         CrudRepository<Ticket, TicketId> ticketRepository = new CrudRepository<>();
+        CrudValueRepository<Visit> visitRepository = new CrudValueRepository<>();
+
 
         VisitorDataAccess visitorDataAccess = new VisitorDataAccess(visitorRepository, minorVisitorRepository);
         Shell shell = new Shell
