@@ -42,9 +42,10 @@ public abstract class Command implements PrettyPrintable
 	public @NotNull String prettyPrint()
 	{
 		StringBuilder builder = new StringBuilder();
-        builder.append(ShellColors.YELLOW)
+		builder.append(ShellColors.YELLOW)
 			   .append(name)
-			   .append(": " + ShellColors.RESET)
+			   .append(": ")
+			   .append(ShellColors.RESET)
 			   .append(description)
 			   .append('\n')
 			   .append(ShellColors.BLUE_BRIGHT)
