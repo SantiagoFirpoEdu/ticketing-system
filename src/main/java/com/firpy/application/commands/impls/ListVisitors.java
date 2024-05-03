@@ -16,7 +16,7 @@ public class ListVisitors extends Command
 	}
 
 	@Override
-	public void run(@NotNull String[] args, @NotNull Shell shell) throws CommandException, CommandUsageException
+	public void run(@NotNull String[] args, @NotNull Shell shell)
 	{
 		//TODO: print all visitors
 	}
