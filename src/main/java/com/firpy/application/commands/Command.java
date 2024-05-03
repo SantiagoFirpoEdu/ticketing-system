@@ -25,17 +25,17 @@ public abstract class Command implements PrettyPrintable
 		return name;
 	}
 
-	public void addArgumentModel(@NotNull ArgumentSchema argumentSchema)
+	public void addArgumentSchema(@NotNull ArgumentSchema argumentSchema)
 	{
 		argumentSchema.setIndex(argumentSchemas.size());
 		argumentSchemas.add(argumentSchema);
 	}
 
-	public void addArgumentModels(ArgumentSchema @NotNull ... argumentSchemas)
+	public void addArgumentSchemas(ArgumentSchema @NotNull ... argumentSchemas)
 	{
 		for (ArgumentSchema argumentSchema : argumentSchemas)
 		{
-			addArgumentModel(argumentSchema);
+			addArgumentSchema(argumentSchema);
 		}
 	}
 

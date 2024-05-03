@@ -17,7 +17,7 @@ public class RegisterVisitorCommand extends Command
 	{
 		super("register-visitor", "Registers a visitor to the system.");
 		this.repository = repository;
-		addArgumentModels(nameArgument, dateOfBirthArgument, phoneNumberArgument);
+		addArgumentSchemas(nameArgument, dateOfBirthArgument, phoneNumberArgument);
 	}
 
 	@Override
