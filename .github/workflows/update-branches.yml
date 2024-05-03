@@ -18,7 +18,7 @@ jobs:
       - name: Get branch names
         id: branches
         run: |
-          git ls-remote --heads origin | awk -F'/' '{print $3}' | grep -vE '^(feature/*)$' > ${{ github.workspace }}/branches.txt
+          git ls-remote --heads origin | awk -F'/' '{print $3}' > ${{ github.workspace }}/branches.txt
           
       - name: Update branches
         run: |   
