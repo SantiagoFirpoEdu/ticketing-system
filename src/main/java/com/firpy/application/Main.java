@@ -16,7 +16,10 @@ public class Main
         CrudRepository<Attraction, Long> attractionRepository = new CrudRepository<>();
         CrudRepository<Ticket, TicketId> ticketRepository = new CrudRepository<>();
         CrudValueRepository<Visit> visitRepository = new CrudValueRepository<>();
-
+        attractionRepository.save(new Attraction(0, "Montanha Russa"));
+        attractionRepository.save(new Attraction(1, "Roda Gigante"));
+        attractionRepository.save(new Attraction(2, "Barco Pirata"));
+        attractionRepository.save(new Attraction(3, "Carro Bate Bate"));
 
         VisitorDataAccess visitorDataAccess = new VisitorDataAccess(visitorRepository, minorVisitorRepository);
         Shell shell = new Shell
