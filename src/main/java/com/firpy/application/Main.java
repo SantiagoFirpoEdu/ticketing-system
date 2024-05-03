@@ -1,5 +1,6 @@
 package com.firpy.application;
 
+import com.firpy.application.commands.impls.*;
 import com.firpy.application.shell.Shell;
 import com.firpy.model.*;
 import com.firpy.repositories.CrudRepository;
@@ -20,7 +21,11 @@ public class Main
         VisitorDataAccess visitorDataAccess = new VisitorDataAccess(visitorRepository, minorVisitorRepository);
         Shell shell = new Shell
         (
-            visitorDataAccess
+            new RegisterVisitorCommand(visitorDataAccess),
+            new RegisterMinorVisitorCommand(visitorDataAccess),
+            new ListVisitors(visitorDataAccess),
+            new ExitCommand(),
+            new HelpCommand()
         );
         shell.help();
         shell.waitForInput();

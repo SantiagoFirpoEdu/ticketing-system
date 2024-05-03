@@ -4,8 +4,6 @@ import com.firpy.application.commands.*;
 import com.firpy.application.commands.exceptions.CommandException;
 import com.firpy.application.commands.exceptions.CommandNotFoundException;
 import com.firpy.application.commands.exceptions.CommandUsageException;
-import com.firpy.application.commands.impls.*;
-import com.firpy.repositories.impls.VisitorDataAccess;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
@@ -13,13 +11,14 @@ import java.util.Scanner;
 
 public class Shell
 {
-	public Shell(VisitorDataAccess visitorDataAccess)
+	public Shell(Command... commands)
 	{
-		commandRegistry.registerCommand(new RegisterVisitorCommand(visitorDataAccess));
-		commandRegistry.registerCommand(new RegisterMinorVisitorCommand(visitorDataAccess));
-		commandRegistry.registerCommand(new ListVisitors(visitorDataAccess));
-		commandRegistry.registerCommand(new ExitCommand());
-		commandRegistry.registerCommand(new HelpCommand());
+		registerCommands(commands);
+	}
+
+	public void registerCommands(Command... commands)
+	{
+		commandRegistry.registerCommands(commands);
 	}
 
 	public void exit()

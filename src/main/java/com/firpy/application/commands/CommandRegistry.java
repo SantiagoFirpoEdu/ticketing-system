@@ -29,6 +29,14 @@ public class CommandRegistry implements PrettyPrintable
 		return builder.toString();
 	}
 
+	public void registerCommands(Command @NotNull ... commands)
+	{
+		for (Command command : commands)
+		{
+			registerCommand(command);
+		}
+	}
+
 	public void registerCommand(@NotNull Command command)
 	{
 		commands.put(command.getName(), command);
