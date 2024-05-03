@@ -9,17 +9,17 @@ import com.firpy.application.commands.exceptions.CommandUsageException;
 import com.firpy.application.shell.Shell;
 import com.firpy.model.MinorVisitor;
 import com.firpy.repositories.exceptions.CheckedIllegalArgumentException;
-import com.firpy.repositories.impls.MinorVisitorDataAccess;
+import com.firpy.repositories.impls.VisitorDataAccess;
 import org.jetbrains.annotations.NotNull;
 
 import java.time.LocalDate;
 
 public class RegisterMinorVisitorCommand extends Command
 {
-	public RegisterMinorVisitorCommand(MinorVisitorDataAccess minorVisitorDataAccess)
+	public RegisterMinorVisitorCommand(VisitorDataAccess visitorDataAccess)
 	{
 		super("register-minor-visitor", "Registers a minor visitor to the system.");
-		this.minorVisitorDataAccess = minorVisitorDataAccess;
+		this.visitorDataAccess = visitorDataAccess;
 		addArgumentModels(nameArgument, guardianIdArgument, dateOfBirthArgument);
 	}
 
@@ -31,7 +31,7 @@ public class RegisterMinorVisitorCommand extends Command
 		LocalDate dateOfBirth = dateOfBirthArgument.parse(args);
         try
         {
-            MinorVisitor minorVisitor = minorVisitorDataAccess.registerMinorVisitor(name, dateOfBirth, guardianId);
+            MinorVisitor minorVisitor = visitorDataAccess.registerMinorVisitor(name, dateOfBirth, guardianId);
 			shell.println("Minor visitor registered successfully: %s".formatted(minorVisitor));
         }
         catch (CheckedIllegalArgumentException e)
@@ -43,5 +43,5 @@ public class RegisterMinorVisitorCommand extends Command
 	private final StringArgumentSchema nameArgument = new StringArgumentSchema("name", "The name of the minor visitor", this);
 	private final LongArgumentSchema guardianIdArgument = new LongArgumentSchema("guardian-id", "The id of the minor visitor's guardian", this);
 	private final LocalDateArgumentSchema dateOfBirthArgument = new LocalDateArgumentSchema("date-of-birth", "The date of birth of the minor visitor", this);
-	private final MinorVisitorDataAccess minorVisitorDataAccess;
+	private final VisitorDataAccess visitorDataAccess;
 }

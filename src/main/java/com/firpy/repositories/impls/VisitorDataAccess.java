@@ -1,7 +1,7 @@
 package com.firpy.repositories.impls;
 
 import com.firpy.model.MinorVisitor;
-import com.firpy.model.Visitor;
+import com.firpy.model.AdultVisitor;
 import com.firpy.repositories.CrudRepository;
 import com.firpy.repositories.exceptions.CheckedIllegalArgumentException;
 import org.jetbrains.annotations.NotNull;
@@ -9,9 +9,9 @@ import org.jetbrains.annotations.NotNull;
 import java.time.LocalDate;
 import java.util.Optional;
 
-public class MinorVisitorDataAccess
+public class VisitorDataAccess
 {
-    public MinorVisitorDataAccess(CrudRepository<Visitor, Long> visitorRepository, CrudRepository<MinorVisitor, Long> minorVisitorRepository)
+    public VisitorDataAccess(CrudRepository<AdultVisitor, Long> visitorRepository, CrudRepository<MinorVisitor, Long> minorVisitorRepository)
     {
         this.visitorRepository = visitorRepository;
         this.minorVisitorRepository = minorVisitorRepository;
@@ -19,18 +19,29 @@ public class MinorVisitorDataAccess
 
     public @NotNull MinorVisitor registerMinorVisitor(String name, LocalDate dateOfBirth, Long guardianId) throws CheckedIllegalArgumentException
     {
-        Optional<Visitor> guardian = visitorRepository.findById(guardianId);
+        Optional<AdultVisitor> guardian = visitorRepository.findById(guardianId);
 
         if (guardian.isEmpty())
         {
             throw new CheckedIllegalArgumentException("Guardian with ID %d not found.".formatted(guardianId));
         }
 
-        MinorVisitor visitor = new MinorVisitor(0, name, dateOfBirth, guardian.get());
+        MinorVisitor visitor = new MinorVisitor(nextId++, name, dateOfBirth, guardian.get());
         minorVisitorRepository.save(visitor);
+
         return visitor;
     }
 
-    private final CrudRepository<Visitor, Long> visitorRepository;
+    public AdultVisitor registerAdultVisitor(String name, LocalDate dateOfBirth, String phoneNumber)
+    {
+        AdultVisitor adultVisitor = new AdultVisitor(nextId++, name, dateOfBirth, phoneNumber);
+        visitorRepository.save(adultVisitor);
+
+        return adultVisitor;
+    }
+
+    private final CrudRepository<AdultVisitor, Long> visitorRepository;
     private final CrudRepository<MinorVisitor, Long> minorVisitorRepository;
+
+    private int nextId = 0;
 }
