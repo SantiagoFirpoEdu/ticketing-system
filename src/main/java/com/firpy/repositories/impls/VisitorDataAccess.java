@@ -1,5 +1,6 @@
 package com.firpy.repositories.impls;
 
+import com.firpy.model.IVisitor;
 import com.firpy.model.MinorVisitor;
 import com.firpy.model.AdultVisitor;
 import com.firpy.repositories.CrudRepository;
@@ -7,6 +8,8 @@ import com.firpy.repositories.exceptions.CheckedIllegalArgumentException;
 import org.jetbrains.annotations.NotNull;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public class VisitorDataAccess
@@ -38,6 +41,14 @@ public class VisitorDataAccess
         visitorRepository.save(adultVisitor);
 
         return adultVisitor;
+    }
+
+    public List<IVisitor> findAllVisitors()
+    {
+        ArrayList<IVisitor> allVisitors = new ArrayList<>(visitorRepository.findAll());
+        allVisitors.addAll(minorVisitorRepository.findAll());
+
+        return allVisitors;
     }
 
     private final CrudRepository<AdultVisitor, Long> visitorRepository;
