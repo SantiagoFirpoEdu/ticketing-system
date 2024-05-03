@@ -20,7 +20,7 @@ public class RegisterMinorVisitorCommand extends Command
 	{
 		super("register-minor-visitor", "Registers a minor visitor to the system.");
 		this.visitorDataAccess = visitorDataAccess;
-		addArgumentModels(nameArgument, guardianIdArgument, dateOfBirthArgument);
+		addArgumentSchemas(nameArgument, guardianIdArgument, dateOfBirthArgument);
 	}
 
 	@Override
