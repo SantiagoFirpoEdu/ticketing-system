@@ -1,0 +1,30 @@
+name: Auto Merge to Feature Branches
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  merge_to_feature_branches:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout main branch
+      uses: actions/checkout@v3
+      with:
+        ref: main
+        fetch-depth: 0
+
+    - name: Set committer identity
+      run: |
+        git config --global user.email "s.firpo@edu.pucrs.br"
+        git config --global user.name "GitHub Actions Runner"
+    - name: Merge to feature branches
+      run: |
+        for branch in $(git branch -r | grep 'origin/feature/' | sed 's/origin\///'); do
+          git checkout -b "$branch" origin/"$branch"
+          echo "$branch"
+          git merge main --no-edit
+          git push origin "$branch"
+        done
