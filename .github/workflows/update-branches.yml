@@ -16,6 +16,10 @@ jobs:
         ref: main
         fetch-depth: 0
 
+    - name: Set committer identity
+      run: |
+        git config --global user.email "s.firpo@edu.pucrs.br"
+        git config --global user.name "GitHub Actions Runner"
     - name: Merge to feature branches
       run: |
         for branch in $(git branch -r | grep 'origin/feature/' | sed 's/origin\///'); do
