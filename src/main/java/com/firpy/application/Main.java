@@ -57,7 +57,7 @@ public class Main
 	        //Will never happen
 		}
 
-		TicketDataAccess ticketDataAccess = new TicketDataAccess(ticketRepository);
+		TicketDataAccess ticketDataAccess = new TicketDataAccess(ticketRepository, visitorDataAccess);
 		try
 		{
 			mockTicketData(ticketDataAccess, visitorDataAccess);
