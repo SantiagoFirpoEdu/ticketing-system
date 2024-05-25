@@ -19,8 +19,8 @@ public class TicketDataAccess
 
 	public void registerTicket(LocalDate purchaseDate, Visitor visitor) throws DailyTicketLimitReachedException
 	{
-		long dailyId = dailyIdForDate.getOrDefault(purchaseDate, 0L) + 1;
-		if (dailyId > 500)
+		long dailyId = dailyIdForDate.getOrDefault(purchaseDate, -1L) + 1;
+		if (dailyId >= 500)
 		{
 			throw new DailyTicketLimitReachedException(purchaseDate);
 		}
