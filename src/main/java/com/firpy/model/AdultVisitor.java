@@ -4,7 +4,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.time.LocalDate;
 
-public record AdultVisitor(long id, String name, LocalDate dateOfBirth, String phoneNumber) implements IVisitor
+public record AdultVisitor(long id, String name, LocalDate dateOfBirth, String phoneNumber) implements Visitor
 {
 	@Override
 	public @NotNull Long getId()
@@ -16,5 +16,11 @@ public record AdultVisitor(long id, String name, LocalDate dateOfBirth, String p
 	public @NotNull String getName()
 	{
 		return name;
+	}
+
+	@Override
+	public int getTicketCost()
+	{
+		return 100;
 	}
 }
