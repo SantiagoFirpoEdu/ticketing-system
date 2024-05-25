@@ -11,7 +11,6 @@ import com.firpy.repositories.impls.VisitorDataAccess;
 import org.jetbrains.annotations.NotNull;
 
 import java.time.LocalDate;
-import java.util.Optional;
 
 public class Main
 {
@@ -22,31 +21,9 @@ public class Main
         CrudRepository<Attraction, Long> attractionRepository = new CrudRepository<>();
         CrudRepository<Ticket, TicketId> ticketRepository = new CrudRepository<>();
         CrudRepository<Visit, Long> visitRepository = new CrudRepository<>();
-
-        mockAttractionData(attractionRepository);
-
         VisitorDataAccess visitorDataAccess = new VisitorDataAccess(visitorRepository, minorVisitorRepository);
-        mockVisitorData(visitorDataAccess);
-	    try
-	    {
-		    mockMinorVisitorData(visitorDataAccess);
-	    }
-	    catch (CheckedIllegalArgumentException e)
-	    {
-            //Will never happen
-	    }
 
-        TicketDataAccess ticketDataAccess = new TicketDataAccess(ticketRepository);
-	    try
-	    {
-		    mockTicketData(ticketDataAccess, visitorDataAccess);
-	    }
-	    catch (DailyTicketLimitReachedException e)
-	    {
-            //Will never happen
-	    }
-
-	    mockVisitData(visitRepository, ticketDataAccess, attractionRepository);
+	    mockData(attractionRepository, visitorDataAccess, ticketRepository, visitRepository);
 
 	    Shell shell = new Shell
         (
@@ -63,7 +40,37 @@ public class Main
         shell.waitForInput();
     }
 
-    private static void mockAttractionData(@NotNull CrudRepository<Attraction, Long> attractionRepository)
+	private static void mockData(CrudRepository<Attraction, Long> attractionRepository,
+	                             VisitorDataAccess visitorDataAccess,
+	                             CrudRepository<Ticket, TicketId> ticketRepository,
+	                             CrudRepository<Visit, Long> visitRepository)
+	{
+		mockAttractionData(attractionRepository);
+		mockVisitorData(visitorDataAccess);
+
+		try
+		{
+			mockMinorVisitorData(visitorDataAccess);
+		}
+		catch (CheckedIllegalArgumentException e)
+		{
+	        //Will never happen
+		}
+
+		TicketDataAccess ticketDataAccess = new TicketDataAccess(ticketRepository);
+		try
+		{
+			mockTicketData(ticketDataAccess, visitorDataAccess);
+		}
+		catch (DailyTicketLimitReachedException e)
+		{
+	        //Will never happen
+		}
+
+		mockVisitData(visitRepository, ticketDataAccess, attractionRepository);
+	}
+
+	private static void mockAttractionData(@NotNull CrudRepository<Attraction, Long> attractionRepository)
     {
         attractionRepository.save(new Attraction(0, "Montanha Russa"));
         attractionRepository.save(new Attraction(1, "Roda Gigante"));
