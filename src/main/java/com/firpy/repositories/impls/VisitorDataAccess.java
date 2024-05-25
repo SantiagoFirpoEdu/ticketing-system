@@ -1,6 +1,6 @@
 package com.firpy.repositories.impls;
 
-import com.firpy.model.IVisitor;
+import com.firpy.model.Visitor;
 import com.firpy.model.MinorVisitor;
 import com.firpy.model.AdultVisitor;
 import com.firpy.repositories.CrudRepository;
@@ -14,15 +14,15 @@ import java.util.Optional;
 
 public class VisitorDataAccess
 {
-    public VisitorDataAccess(CrudRepository<AdultVisitor, Long> visitorRepository, CrudRepository<MinorVisitor, Long> minorVisitorRepository)
+    public VisitorDataAccess(CrudRepository<AdultVisitor, Long> adultVisitorRepository, CrudRepository<MinorVisitor, Long> minorVisitorRepository)
     {
-        this.visitorRepository = visitorRepository;
+        this.adultVisitorRepository = adultVisitorRepository;
         this.minorVisitorRepository = minorVisitorRepository;
     }
 
     public @NotNull MinorVisitor registerMinorVisitor(String name, LocalDate dateOfBirth, Long guardianId) throws CheckedIllegalArgumentException
     {
-        Optional<AdultVisitor> guardian = visitorRepository.findById(guardianId);
+        Optional<AdultVisitor> guardian = adultVisitorRepository.findById(guardianId);
 
         if (guardian.isEmpty())
         {
@@ -38,14 +38,14 @@ public class VisitorDataAccess
     public AdultVisitor registerAdultVisitor(String name, LocalDate dateOfBirth, String phoneNumber)
     {
         AdultVisitor adultVisitor = new AdultVisitor(nextId++, name, dateOfBirth, phoneNumber);
-        visitorRepository.save(adultVisitor);
+        adultVisitorRepository.save(adultVisitor);
 
         return adultVisitor;
     }
 
-    public List<IVisitor> findAllVisitors()
+    public List<Visitor> findAllVisitors()
     {
-        ArrayList<IVisitor> allVisitors = new ArrayList<>(visitorRepository.findAll());
+        ArrayList<Visitor> allVisitors = new ArrayList<>(adultVisitorRepository.findAll());
         allVisitors.addAll(minorVisitorRepository.findAll());
 
         return allVisitors;
