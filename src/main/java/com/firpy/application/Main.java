@@ -11,6 +11,7 @@ import com.firpy.repositories.impls.VisitorDataAccess;
 import org.jetbrains.annotations.NotNull;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 public class Main
 {
@@ -23,7 +24,6 @@ public class Main
         CrudRepository<Visit, Long> visitRepository = new CrudRepository<>();
 
         mockAttractionData(attractionRepository);
-        mockVisitData(visitRepository);
 
         VisitorDataAccess visitorDataAccess = new VisitorDataAccess(visitorRepository, minorVisitorRepository);
         mockVisitorData(visitorDataAccess);
@@ -45,6 +45,8 @@ public class Main
 	    {
             //Will never happen
 	    }
+
+	    mockVisitData(visitRepository, ticketDataAccess, attractionRepository);
 
 	    Shell shell = new Shell
         (
@@ -91,12 +93,14 @@ public class Main
         ticketDataAccess.registerTicket(LocalDate.now(), visitorDataAccess.findVisitorById(4).get());
     }
 
-    private static void mockVisitData(@NotNull CrudRepository<Visit, Long> visitRepository)
+    private static void mockVisitData(@NotNull CrudRepository<Visit, Long> visitRepository, TicketDataAccess ticketDataAccess, CrudRepository<Attraction, Long> attractionRepository)
     {
-        visitRepository.save(new Visit(0, 0, new TicketId(LocalDate.now(), 0), LocalDate.now(), 0L));
-        visitRepository.save(new Visit(1, 0, new TicketId(LocalDate.now(), 1), LocalDate.now(), 0L));
-        visitRepository.save(new Visit(2, 0, new TicketId(LocalDate.now(), 2), LocalDate.now(), 1L));
-        visitRepository.save(new Visit(3, 0, new TicketId(LocalDate.now(), 3), LocalDate.now(), 1L));
-        visitRepository.save(new Visit(4, 0, new TicketId(LocalDate.now(), 4), LocalDate.now(), 1L));
+	    Ticket ticket = ticketDataAccess.findById(new TicketId(LocalDate.now(), 0)).get();
+	    Attraction attraction = attractionRepository.findById(0L).get();
+	    visitRepository.save(new Visit(0, ticket, attraction));
+	    visitRepository.save(new Visit(1, ticketDataAccess.findById(new TicketId(LocalDate.now(), 1)).get(), attraction));
+	    visitRepository.save(new Visit(2, ticketDataAccess.findById(new TicketId(LocalDate.now(), 2)).get(), attraction));
+	    visitRepository.save(new Visit(3, ticketDataAccess.findById(new TicketId(LocalDate.now(), 3)).get(), attraction));
+	    visitRepository.save(new Visit(4, ticketDataAccess.findById(new TicketId(LocalDate.now(), 4)).get(), attraction));
     }
 }

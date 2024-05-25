@@ -2,9 +2,7 @@ package com.firpy.model;
 
 import com.firpy.repositories.Identifiable;
 
-import java.time.LocalDate;
-
-public record Visit(long id, long visitorId, TicketId ticketId, LocalDate date, Long attractionId) implements Identifiable<Long>
+public record Visit(long id, Ticket ticket, Attraction attraction) implements Identifiable<Long>
 {
 	@Override
 	public Long getId()
