@@ -16,6 +16,7 @@ public class QueryEarningsForYearCommand extends Command
 	{
 		super("query-earnings-for-year", "Query earnings for a year.");
 		this.ticketRepository = ticketRepository;
+		addArgumentSchemas(yearArgument);
 	}
 
 	@Override
