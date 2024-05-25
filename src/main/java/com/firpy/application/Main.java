@@ -28,7 +28,6 @@ public class Main
             new RegisterVisitorCommand(visitorDataAccess),
             new RegisterMinorVisitorCommand(visitorDataAccess),
             new ListVisitors(visitorDataAccess),
-            new QueryVisitsByDateCommand(visitRepository, attractionRepository),
             new ExitCommand(),
             new HelpCommand()
         );
