@@ -8,6 +8,7 @@ import com.firpy.repositories.exceptions.DailyTicketLimitReachedException;
 
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.Optional;
 
 public class TicketDataAccess
 {
@@ -28,6 +29,12 @@ public class TicketDataAccess
 		ticketRepository.save(new Ticket(new TicketId(purchaseDate, dailyId), visitor));
 	}
 
+	public Optional<Ticket> findById(TicketId ticketId)
+	{
+		return ticketRepository.findById(ticketId);
+	}
+
 	private final CrudRepository<Ticket, TicketId> ticketRepository;
 	private final HashMap<LocalDate, Long> dailyIdForDate = new HashMap<>();
+
 }
