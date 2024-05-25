@@ -21,8 +21,9 @@ public class Main
         CrudRepository<Ticket, TicketId> ticketRepository = new CrudRepository<>();
         CrudRepository<Visit, Long> visitRepository = new CrudRepository<>();
         VisitorDataAccess visitorDataAccess = new VisitorDataAccess(visitorRepository, minorVisitorRepository);
+	    TicketDataAccess ticketDataAccess = new TicketDataAccess(ticketRepository, visitorDataAccess);
 
-	    mockData(attractionRepository, visitorDataAccess, ticketRepository, visitRepository);
+	    mockData(attractionRepository, visitorDataAccess, ticketDataAccess, visitRepository);
 
 	    Shell shell = new Shell
         (
@@ -42,7 +43,7 @@ public class Main
 
 	private static void mockData(CrudRepository<Attraction, Long> attractionRepository,
 	                             VisitorDataAccess visitorDataAccess,
-	                             CrudRepository<Ticket, TicketId> ticketRepository,
+								 TicketDataAccess ticketDataAccess,
 	                             CrudRepository<Visit, Long> visitRepository)
 	{
 		mockAttractionData(attractionRepository);
@@ -57,7 +58,6 @@ public class Main
 	        //Will never happen
 		}
 
-		TicketDataAccess ticketDataAccess = new TicketDataAccess(ticketRepository, visitorDataAccess);
 		try
 		{
 			mockTicketData(ticketDataAccess, visitorDataAccess);
