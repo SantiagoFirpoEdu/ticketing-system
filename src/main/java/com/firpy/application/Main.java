@@ -29,6 +29,7 @@ public class Main
             new RegisterVisitorCommand(visitorDataAccess),
             new RegisterMinorVisitorCommand(visitorDataAccess),
             new ListVisitors(visitorDataAccess),
+			new QueryVisitsByDateCommand(visitRepository),
             new QueryEarningsForMonthCommand(ticketRepository),
             new QueryEarningsForYearCommand(ticketRepository),
             new ExitCommand(),
@@ -102,11 +103,10 @@ public class Main
     private static void mockVisitData(@NotNull CrudRepository<Visit, Long> visitRepository, TicketDataAccess ticketDataAccess, CrudRepository<Attraction, Long> attractionRepository)
     {
 	    Ticket ticket = ticketDataAccess.findById(new TicketId(LocalDate.now(), 0)).get();
-	    Attraction attraction = attractionRepository.findById(0L).get();
-	    visitRepository.save(new Visit(0, ticket, attraction));
-	    visitRepository.save(new Visit(1, ticketDataAccess.findById(new TicketId(LocalDate.now(), 1)).get(), attraction));
-	    visitRepository.save(new Visit(2, ticketDataAccess.findById(new TicketId(LocalDate.now(), 2)).get(), attraction));
-	    visitRepository.save(new Visit(3, ticketDataAccess.findById(new TicketId(LocalDate.now(), 3)).get(), attraction));
-	    visitRepository.save(new Visit(4, ticketDataAccess.findById(new TicketId(LocalDate.now(), 4)).get(), attraction));
+	    visitRepository.save(new Visit(0, ticket, attractionRepository.findById(2L).get()));
+	    visitRepository.save(new Visit(1, ticketDataAccess.findById(new TicketId(LocalDate.now(), 1)).get(), attractionRepository.findById(2L).get()));
+	    visitRepository.save(new Visit(2, ticketDataAccess.findById(new TicketId(LocalDate.now(), 2)).get(), attractionRepository.findById(2L).get()));
+	    visitRepository.save(new Visit(3, ticketDataAccess.findById(new TicketId(LocalDate.now(), 3)).get(), attractionRepository.findById(1L).get()));
+	    visitRepository.save(new Visit(4, ticketDataAccess.findById(new TicketId(LocalDate.now(), 4)).get(), attractionRepository.findById(0L).get()));
     }
 }

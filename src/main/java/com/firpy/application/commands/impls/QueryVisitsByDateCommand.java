@@ -15,11 +15,10 @@ import java.util.*;
 
 public class QueryVisitsByDateCommand extends Command
 {
-	public QueryVisitsByDateCommand(CrudRepository<Visit, Long> visitRepository, CrudRepository<Attraction, Long> attractionRepository)
+	public QueryVisitsByDateCommand(CrudRepository<Visit, Long> visitRepository)
 	{
 		super("query-visits-by-date", "Query visits by a date.");
 		this.visitRepository = visitRepository;
-		this.attractionRepository = attractionRepository;
 		addArgumentSchemas(filterByDateArgument);
 	}
 
@@ -27,37 +26,28 @@ public class QueryVisitsByDateCommand extends Command
 	public void run(@NotNull String[] args, @NotNull Shell shell) throws CommandException, CommandUsageException
 	{
 		LocalDate parsedDate = filterByDateArgument.parse(args);
-		List<Visit> filtered = visitRepository.findManyByPredicate(visit -> visit.date().isEqual(parsedDate));
+		List<Visit> filtered = visitRepository.findManyByPredicate(visit -> visit.ticket().id().purchaseDate().isEqual(parsedDate));
 
-		TreeMap<Long, Integer> attractionVisitCount = new TreeMap<>();
+		HashMap<Attraction, Integer> attractionVisitCount = new HashMap<>();
 
 		for (Visit visit : filtered)
 		{
-			if (attractionVisitCount.containsKey(visit.attractionId()))
-			{
-				attractionVisitCount.put(visit.attractionId(), attractionVisitCount.get(visit.attractionId()) + 1);
-			}
-			else
-			{
-				attractionVisitCount.put(visit.attractionId(), 1);
-			}
+			int visitCount = attractionVisitCount.getOrDefault(visit.attraction(), 0) + 1;
+			attractionVisitCount.put(visit.attraction(), visitCount);
 		}
 
 		List<Attraction> attractionsSortedByVisitCount = attractionVisitCount.keySet()
 																			 .stream()
 																			 .sorted(Comparator.comparing(attractionVisitCount::get)
-																			 .reversed()).map(attractionRepository::findById)
-																			 .map(Optional::get)
+																			 .reversed())
 																			 .toList();
 		shell.println("Result:");
 		for (Attraction attraction : attractionsSortedByVisitCount)
 		{
-			shell.println("%s: %d visits".formatted(attraction.name(), attractionVisitCount.get(attraction.id())));
+			shell.println("%s: %d visits".formatted(attraction.name(), attractionVisitCount.get(attraction)));
 		}
 	}
 
 	private final CrudRepository<Visit, Long> visitRepository;
-	private final CrudRepository<Attraction, Long> attractionRepository;
-
 	private final LocalDateArgumentSchema filterByDateArgument = new LocalDateArgumentSchema("filter-by-date", "The date used to filter visits", this);
 }
