@@ -17,4 +17,10 @@ public record AdultVisitor(long id, String name, LocalDate dateOfBirth, String p
 	{
 		return name;
 	}
+
+	@Override
+	public int getTicketCost()
+	{
+		return 100;
+	}
 }
