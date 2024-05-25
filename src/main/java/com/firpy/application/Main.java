@@ -1,11 +1,5 @@
 package com.firpy.application;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import com.firpy.application.commands.impls.*;
 import com.firpy.application.shell.Shell;
 import com.firpy.model.*;
@@ -17,9 +11,6 @@ import com.firpy.repositories.impls.VisitorDataAccess;
 import org.jetbrains.annotations.NotNull;
 
 import java.time.LocalDate;
-
-import java.time.LocalDate;
-import java.util.*;
 public class Main
 {
     public static void main(String[] args)
