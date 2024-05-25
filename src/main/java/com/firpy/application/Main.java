@@ -4,6 +4,9 @@ import com.firpy.application.commands.impls.*;
 import com.firpy.application.shell.Shell;
 import com.firpy.model.*;
 import com.firpy.repositories.CrudRepository;
+import com.firpy.repositories.exceptions.CheckedIllegalArgumentException;
+import com.firpy.repositories.exceptions.DailyTicketLimitReachedException;
+import com.firpy.repositories.impls.TicketDataAccess;
 import com.firpy.repositories.impls.VisitorDataAccess;
 import org.jetbrains.annotations.NotNull;
 
@@ -23,14 +26,37 @@ public class Main
         mockVisitData(visitRepository);
 
         VisitorDataAccess visitorDataAccess = new VisitorDataAccess(visitorRepository, minorVisitorRepository);
-        Shell shell = new Shell
+        mockVisitorData(visitorDataAccess);
+	    try
+	    {
+		    mockMinorVisitorData(visitorDataAccess);
+	    }
+	    catch (CheckedIllegalArgumentException e)
+	    {
+            //Will never happen
+	    }
+
+        TicketDataAccess ticketDataAccess = new TicketDataAccess(ticketRepository);
+	    try
+	    {
+		    mockTicketData(ticketDataAccess, visitorDataAccess);
+	    }
+	    catch (DailyTicketLimitReachedException e)
+	    {
+            //Will never happen
+	    }
+
+	    Shell shell = new Shell
         (
             new RegisterVisitorCommand(visitorDataAccess),
             new RegisterMinorVisitorCommand(visitorDataAccess),
             new ListVisitors(visitorDataAccess),
+            new QueryEarningsForMonthCommand(ticketRepository),
+            new QueryEarningsForYearCommand(ticketRepository),
             new ExitCommand(),
             new HelpCommand()
         );
+
         shell.help();
         shell.waitForInput();
     }
@@ -43,13 +69,34 @@ public class Main
         attractionRepository.save(new Attraction(3, "Carro Bate Bate"));
     }
 
+    private static void mockVisitorData(@NotNull VisitorDataAccess visitorDataAccess)
+    {
+        visitorDataAccess.registerAdultVisitor("Andreia Silveira", LocalDate.of(1990, 1, 1), "123456789");
+        visitorDataAccess.registerAdultVisitor("Roberto Silveira", LocalDate.of(1995, 1, 1), "987654321");
+    }
+
+    private static void mockMinorVisitorData(@NotNull VisitorDataAccess visitorDataAccess) throws CheckedIllegalArgumentException
+    {
+        visitorDataAccess.registerMinorVisitor("Alice Silveira", LocalDate.of(2010, 1, 1), 0L);
+        visitorDataAccess.registerMinorVisitor("Miguel Silveira", LocalDate.of(2015, 1, 1), 0L);
+        visitorDataAccess.registerMinorVisitor("Enzo Silveira", LocalDate.of(2015, 1, 1), 1L);
+    }
+
+    private static void mockTicketData(TicketDataAccess ticketDataAccess, VisitorDataAccess visitorDataAccess) throws DailyTicketLimitReachedException
+    {
+        ticketDataAccess.registerTicket(LocalDate.now(), visitorDataAccess.findVisitorById(0).get());
+        ticketDataAccess.registerTicket(LocalDate.now(), visitorDataAccess.findVisitorById(1).get());
+        ticketDataAccess.registerTicket(LocalDate.now(), visitorDataAccess.findVisitorById(2).get());
+        ticketDataAccess.registerTicket(LocalDate.now(), visitorDataAccess.findVisitorById(3).get());
+        ticketDataAccess.registerTicket(LocalDate.now(), visitorDataAccess.findVisitorById(4).get());
+    }
+
     private static void mockVisitData(@NotNull CrudRepository<Visit, Long> visitRepository)
     {
         visitRepository.save(new Visit(0, 0, new TicketId(LocalDate.now(), 0), LocalDate.now(), 0L));
-        visitRepository.save(new Visit(1, 0, new TicketId(LocalDate.now(), 0), LocalDate.now(), 0L));
-        visitRepository.save(new Visit(2, 0, new TicketId(LocalDate.now(), 0), LocalDate.now(), 1L));
-        visitRepository.save(new Visit(3, 0, new TicketId(LocalDate.now(), 0), LocalDate.now(), 1L));
-        visitRepository.save(new Visit(4, 0, new TicketId(LocalDate.now(), 0), LocalDate.now(), 1L));
-        visitRepository.save(new Visit(5, 0, new TicketId(LocalDate.now(), 0), LocalDate.now(), 2L));
+        visitRepository.save(new Visit(1, 0, new TicketId(LocalDate.now(), 1), LocalDate.now(), 0L));
+        visitRepository.save(new Visit(2, 0, new TicketId(LocalDate.now(), 2), LocalDate.now(), 1L));
+        visitRepository.save(new Visit(3, 0, new TicketId(LocalDate.now(), 3), LocalDate.now(), 1L));
+        visitRepository.save(new Visit(4, 0, new TicketId(LocalDate.now(), 4), LocalDate.now(), 1L));
     }
 }
