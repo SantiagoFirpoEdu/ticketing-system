@@ -7,7 +7,7 @@ import com.firpy.repositories.CrudRepository;
 import com.firpy.repositories.exceptions.DailyTicketLimitReachedException;
 
 import java.time.LocalDate;
-import java.util.Optional;
+import java.util.HashMap;
 
 public class TicketDataAccess
 {
@@ -18,25 +18,16 @@ public class TicketDataAccess
 
 	public void registerTicket(LocalDate purchaseDate, Visitor visitor) throws DailyTicketLimitReachedException
 	{
-		if (lastPurchaseDate.isEmpty() || !lastPurchaseDate.get().equals(purchaseDate))
-		{
-			dailyId = 0;
-		}
-		else if (dailyId == 500)
+		long dailyId = dailyIdForDate.getOrDefault(purchaseDate, 0L) + 1;
+		if (dailyId > 500)
 		{
 			throw new DailyTicketLimitReachedException(purchaseDate);
 		}
-		ticketRepository.save(new Ticket(new TicketId(purchaseDate, dailyId++), visitor));
-		lastPurchaseDate = Optional.of(purchaseDate);
-	}
 
-	public Optional<Ticket> findTicketByIdAndDate(long dailyId, LocalDate date)
-	{
-		return ticketRepository.findById(new TicketId(date, dailyId));
+		dailyIdForDate.put(purchaseDate, dailyId);
+		ticketRepository.save(new Ticket(new TicketId(purchaseDate, dailyId), visitor));
 	}
 
 	private final CrudRepository<Ticket, TicketId> ticketRepository;
-
-	private long dailyId = 0;
-	private Optional<LocalDate> lastPurchaseDate = Optional.empty();
+	private final HashMap<LocalDate, Long> dailyIdForDate = new HashMap<>();
 }
