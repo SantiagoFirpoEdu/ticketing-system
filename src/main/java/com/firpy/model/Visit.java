@@ -4,7 +4,7 @@ import com.firpy.repositories.Identifiable;
 
 import java.time.LocalDateTime;
 
-public record Visit(long visitorId, TicketId ticketId, LocalDateTime date) implements Identifiable<Visit>
+public record Visit(long visitorId, TicketId ticketId, LocalDateTime date, long AttractionId) implements Identifiable<Visit>
 {
 	@Override
 	public Visit getId()
