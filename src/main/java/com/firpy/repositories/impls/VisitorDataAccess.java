@@ -51,7 +51,19 @@ public class VisitorDataAccess
         return allVisitors;
     }
 
-    private final CrudRepository<AdultVisitor, Long> visitorRepository;
+    public Optional<Visitor> findVisitorById(long id)
+    {
+        Optional<Visitor> visitor = adultVisitorRepository.findById(id).map(asVisitor -> asVisitor);
+
+        if (visitor.isEmpty())
+        {
+            visitor = minorVisitorRepository.findById(id).map(asVisitor -> asVisitor);
+        }
+
+        return visitor;
+    }
+
+    private final CrudRepository<AdultVisitor, Long> adultVisitorRepository;
     private final CrudRepository<MinorVisitor, Long> minorVisitorRepository;
 
     private int nextId = 0;
