@@ -40,6 +40,7 @@ public class Main
             new QueryEarningsForMonthCommand(ticketRepository),
             new QueryEarningsForYearCommand(ticketRepository),
 			new QueryVisitorByTicketIdCommand(ticketDataAccess),
+			new QueryVisitorsByNameCommand(visitorDataAccess),
 			new RegisterVisitCommand(visitDataAccess, ticketDataAccess, attractionRepository),
             new ExitCommand(),
             new HelpCommand()
