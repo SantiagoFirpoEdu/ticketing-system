@@ -35,6 +35,7 @@ public class Main
 			new QueryVisitsByDateCommand(visitRepository),
             new QueryEarningsForMonthCommand(ticketRepository),
             new QueryEarningsForYearCommand(ticketRepository),
+			new RegisterVisitCommand(visitDataAccess, ticketDataAccess, attractionRepository),
             new ExitCommand(),
             new HelpCommand()
         );
