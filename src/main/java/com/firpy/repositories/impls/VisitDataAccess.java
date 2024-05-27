@@ -2,9 +2,12 @@ package com.firpy.repositories.impls;
 
 import com.firpy.model.Attraction;
 import com.firpy.model.Ticket;
+import com.firpy.model.TicketId;
 import com.firpy.model.Visit;
 import com.firpy.repositories.CrudRepository;
 
+import java.time.LocalDate;
+import java.util.Collection;
 import java.util.List;
 
 public class VisitDataAccess
@@ -26,7 +29,11 @@ public class VisitDataAccess
 		return visitRepository.findAll();
 	}
 
+	public List<Visit> findVisitsByTicketId(TicketId ticketId)
+	{
+		return visitRepository.findAll();
+	}
+
 	private long nextVisitId = 0;
 	private final CrudRepository<Visit, Long> visitRepository;
-
 }
