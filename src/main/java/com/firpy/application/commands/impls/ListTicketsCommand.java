@@ -2,16 +2,15 @@ package com.firpy.application.commands.impls;
 
 import com.firpy.application.commands.Command;
 import com.firpy.application.shell.Shell;
-import com.firpy.model.Attraction;
 import com.firpy.model.Ticket;
 import com.firpy.repositories.impls.TicketDataAccess;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class ListTickets extends Command
+public class ListTicketsCommand extends Command
 {
-	public ListTickets(TicketDataAccess ticketDataAccess)
+	public ListTicketsCommand(TicketDataAccess ticketDataAccess)
 	{
 		super("list-tickets", "Lists all tickets.");
 		this.ticketDataAccess = ticketDataAccess;

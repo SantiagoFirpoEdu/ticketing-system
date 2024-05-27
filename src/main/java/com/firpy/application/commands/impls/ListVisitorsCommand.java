@@ -8,9 +8,9 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class ListVisitors extends Command
+public class ListVisitorsCommand extends Command
 {
-	public ListVisitors(VisitorDataAccess visitorDataAccess)
+	public ListVisitorsCommand(VisitorDataAccess visitorDataAccess)
 	{
 		super("list-visitors", "Lists all visitors.");
 		this.visitorDataAccess = visitorDataAccess;
