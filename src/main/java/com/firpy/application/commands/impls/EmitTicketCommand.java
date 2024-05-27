@@ -17,5 +17,6 @@ public class EmitTicketCommand extends Command
 	public void run(@NotNull String[] args, @NotNull Shell shell) throws CommandException, CommandUsageException
 	{
 		//TODO: implement ticket emission
+		//I don't know how make it
 	}
 }
