@@ -34,7 +34,8 @@ public class Main
             new QueryEarningsForMonthCommand(ticketRepository),
             new QueryEarningsForYearCommand(ticketRepository),
             new ExitCommand(),
-            new HelpCommand()
+            new HelpCommand(),
+            new EmitTicketCommand()
         );
 
         shell.help();
