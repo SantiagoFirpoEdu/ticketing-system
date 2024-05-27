@@ -33,6 +33,7 @@ public class Main
             new RegisterMinorVisitorCommand(visitorDataAccess),
             new ListVisitors(visitorDataAccess),
 			new ListAttractions(attractionRepository),
+			new ListTickets(ticketDataAccess),
 			new ListVisits(visitDataAccess),
 			new QueryVisitsByDateCommand(visitRepository),
             new QueryEarningsForMonthCommand(ticketRepository),
