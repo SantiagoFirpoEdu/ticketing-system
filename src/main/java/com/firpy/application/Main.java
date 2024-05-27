@@ -32,6 +32,7 @@ public class Main
             new RegisterVisitorCommand(visitorDataAccess),
             new RegisterMinorVisitorCommand(visitorDataAccess),
             new ListVisitors(visitorDataAccess),
+			new ListAttractions(attractionRepository),
 			new ListVisits(visitDataAccess),
 			new QueryVisitsByDateCommand(visitRepository),
             new QueryEarningsForMonthCommand(ticketRepository),
