@@ -7,6 +7,7 @@ import com.firpy.repositories.CrudRepository;
 import com.firpy.repositories.exceptions.CheckedIllegalArgumentException;
 import com.firpy.repositories.exceptions.DailyTicketLimitReachedException;
 import com.firpy.repositories.impls.TicketDataAccess;
+import com.firpy.repositories.impls.VisitDataAccess;
 import com.firpy.repositories.impls.VisitorDataAccess;
 import org.jetbrains.annotations.NotNull;
 
@@ -22,6 +23,7 @@ public class Main
         CrudRepository<Visit, Long> visitRepository = new CrudRepository<>();
         VisitorDataAccess visitorDataAccess = new VisitorDataAccess(visitorRepository, minorVisitorRepository);
 	    TicketDataAccess ticketDataAccess = new TicketDataAccess(ticketRepository, visitorDataAccess);
+	    VisitDataAccess visitDataAccess = new VisitDataAccess(visitRepository);
 
 	    mockData(attractionRepository, visitorDataAccess, ticketDataAccess, visitRepository);
 
