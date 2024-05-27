@@ -8,17 +8,21 @@ import com.firpy.application.commands.exceptions.CommandUsageException;
 import com.firpy.application.shell.Shell;
 import org.jetbrains.annotations.NotNull;
 
+import java.time.LocalDate;
+
 public class EmitTicketCommand extends Command
 {
 	public EmitTicketCommand()
 	{
 		super("emit-ticket", "Emit a ticket for a visitor.");
+		addArgumentSchemas(visitorIdArgument, purchaseDateArgument);
 	}
 
 	@Override
 	public void run(@NotNull String[] args, @NotNull Shell shell) throws CommandException, CommandUsageException
 	{
-		//TODO: implement ticket emission
+		long visitorId = visitorIdArgument.parse(args);
+		LocalDate purchaseDate = purchaseDateArgument.parse(args);
 	}
 
 	private final LongArgumentSchema visitorIdArgument = new LongArgumentSchema("visitor-id", "Visitor ID to emit a ticket for.", this);
