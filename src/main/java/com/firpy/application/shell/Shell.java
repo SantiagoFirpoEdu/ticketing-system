@@ -31,6 +31,12 @@ public class Shell
 		System.out.println(message);
 	}
 
+	public void println(Object object)
+	{
+		System.out.println(object);
+	}
+
+
 	public void println()
 	{
 		System.out.println();
