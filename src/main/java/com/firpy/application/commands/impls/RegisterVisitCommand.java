@@ -27,6 +27,7 @@ public class RegisterVisitCommand extends Command
 		this.visitDataAccess = visitDataAccess;
 		this.ticketDataAccess = ticketDataAccess;
 		this.attractionRepository = attractionRepository;
+		addArgumentSchemas(purchaseDateArgument, dailyIdArgument, attractionIdArgument);
 	}
 
 	@Override
