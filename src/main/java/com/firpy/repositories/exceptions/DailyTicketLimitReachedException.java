@@ -8,4 +8,7 @@ public class DailyTicketLimitReachedException extends Exception
 	{
 		super("Daily ticket limit reached for %s".formatted(date));
 	}
+	public DailyTicketLimitReachedException(String message) {
+		super(message);
+	}
 }

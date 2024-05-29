@@ -35,7 +35,7 @@ public class Main
             new QueryEarningsForYearCommand(ticketRepository),
             new ExitCommand(),
             new HelpCommand(),
-            new EmitTicketCommand()
+            new EmitTicketCommand(ticketDataAccess, visitorDataAccess)
         );
 
         shell.help();
