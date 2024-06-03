@@ -39,6 +39,8 @@ public class Main
 			new QueryVisitsByTicketIdCommand(visitDataAccess),
             new QueryEarningsForMonthCommand(ticketRepository),
             new QueryEarningsForYearCommand(ticketRepository),
+			new QueryVisitorByTicketIdCommand(ticketDataAccess),
+			new QueryVisitorsByNameCommand(visitorDataAccess),
 			new RegisterVisitCommand(visitDataAccess, ticketDataAccess, attractionRepository),
             new ExitCommand(),
             new HelpCommand()
