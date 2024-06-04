@@ -31,6 +31,8 @@ public class Main
         (
             new RegisterVisitorCommand(visitorDataAccess),
             new RegisterMinorVisitorCommand(visitorDataAccess),
+			new RegisterVisitCommand(visitDataAccess, ticketDataAccess, attractionRepository),
+            new EmitTicketCommand(ticketDataAccess, visitorDataAccess),
             new ListVisitorsCommand(visitorDataAccess),
 			new ListAttractionsCommand(attractionRepository),
 			new ListTicketsCommand(ticketDataAccess),
@@ -42,10 +44,8 @@ public class Main
 			new QueryTicketsByDate(ticketRepository),
 			new QueryVisitorByTicketIdCommand(ticketDataAccess),
 			new QueryVisitorsByNameCommand(visitorDataAccess),
-			new RegisterVisitCommand(visitDataAccess, ticketDataAccess, attractionRepository),
             new ExitCommand(),
-            new HelpCommand(),
-            new EmitTicketCommand(ticketDataAccess, visitorDataAccess)
+            new HelpCommand()
         );
 
         shell.help();
