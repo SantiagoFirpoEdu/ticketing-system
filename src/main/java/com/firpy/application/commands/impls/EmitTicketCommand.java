@@ -17,6 +17,8 @@ public class EmitTicketCommand extends Command
 {
 	private final TicketDataAccess ticketDataAccess;
 	private final VisitorDataAccess visitorDataAccess;
+	private final LongArgumentSchema visitorIdArgument = new LongArgumentSchema("visitor-id", "Visitor ID to emit a ticket for.", this);
+	private final LocalDateArgumentSchema purchaseDateArgument = new LocalDateArgumentSchema("purchase-date", "Purchase date of the ticket.", this);
 
 	public EmitTicketCommand(TicketDataAccess ticketDataAccess, VisitorDataAccess visitorDataAccess)
 	{
@@ -29,8 +31,7 @@ public class EmitTicketCommand extends Command
 	@Override
 	public void run(@NotNull String[] args, @NotNull Shell shell) throws CommandException, CommandUsageException
 	{
-	private final LongArgumentSchema visitorIdArgument = new LongArgumentSchema("visitor-id", "Visitor ID to emit a ticket for.", this);
-	private final LocalDateArgumentSchema purchaseDateArgument = new LocalDateArgumentSchema("purchase-date", "Purchase date of the ticket.", this);
+	
 		if (args.length != 1) {
 			throw new CommandUsageException("Usage: emit-ticket <visitor-id>",this);
 		}
