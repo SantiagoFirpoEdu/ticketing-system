@@ -32,7 +32,7 @@ public class EmitTicketCommand extends Command
 		Optional<Visitor> visitor = visitorDataAccess.findVisitorById(visitorId);
 		if (visitor.isEmpty())
 		{
-			throw new CommandException("Visitor with ID " + visitorId + " not found.");
+			throw new CommandException("Visitor with ID %d not found.".formatted(visitorId));
 		}
 
 		try
