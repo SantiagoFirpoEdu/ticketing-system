@@ -22,7 +22,7 @@ public class Main
         CrudRepository<Ticket, TicketId> ticketRepository = new CrudRepository<>();
         CrudRepository<Visit, Long> visitRepository = new CrudRepository<>();
         VisitorDataAccess visitorDataAccess = new VisitorDataAccess(visitorRepository, minorVisitorRepository);
-	    TicketDataAccess ticketDataAccess = new TicketDataAccess(ticketRepository, visitorDataAccess);
+	    TicketDataAccess ticketDataAccess = new TicketDataAccess(ticketRepository);
 	    VisitDataAccess visitDataAccess = new VisitDataAccess(visitRepository);
 
 	    mockData(attractionRepository, visitorDataAccess, ticketDataAccess, visitRepository);

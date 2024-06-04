@@ -14,10 +14,9 @@ import java.util.Optional;
 public class TicketDataAccess
 {
 
-	public TicketDataAccess(CrudRepository<Ticket, TicketId> ticketRepository, VisitorDataAccess visitorDataAccess)
+	public TicketDataAccess(CrudRepository<Ticket, TicketId> ticketRepository)
 	{
 		this.ticketRepository = ticketRepository;
-		this.visitorDataAccess = visitorDataAccess;
 	}
 
 	public void registerTicket(LocalDate purchaseDate, Visitor visitor) throws DailyTicketLimitReachedException
@@ -32,13 +31,6 @@ public class TicketDataAccess
 		ticketRepository.save(new Ticket(new TicketId(purchaseDate, dailyId), visitor));
 	}
 
-	public void registerTicket(LocalDate purchaseDate, long visitorId) throws DailyTicketLimitReachedException
-	{
-		Visitor visitor = visitorDataAccess.findVisitorById(visitorId).orElseThrow();
-		registerTicket(purchaseDate, visitor);
-
-	}
-
 	public List<Ticket> findAllTickets()
 	{
 		return ticketRepository.findAll();
@@ -51,5 +43,4 @@ public class TicketDataAccess
 
 	private final CrudRepository<Ticket, TicketId> ticketRepository;
 	private final HashMap<LocalDate, Long> dailyIdForDate = new HashMap<>();
-	private final VisitorDataAccess visitorDataAccess;
 }
