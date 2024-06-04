@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Predicate;
 
 public class VisitorDataAccess
 {
@@ -63,8 +64,17 @@ public class VisitorDataAccess
         return visitor;
     }
 
+    public List<Visitor> findManyByPredicate(Predicate<Visitor> predicate)
+    {
+        ArrayList<Visitor> allVisitors = new ArrayList<>(adultVisitorRepository.findManyByPredicate(predicate::test));
+        allVisitors.addAll(minorVisitorRepository.findManyByPredicate(predicate::test));
+
+        return allVisitors;
+    }
+
     private final CrudRepository<AdultVisitor, Long> adultVisitorRepository;
     private final CrudRepository<MinorVisitor, Long> minorVisitorRepository;
 
     private int nextId = 0;
+
 }

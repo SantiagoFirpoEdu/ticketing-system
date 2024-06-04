@@ -8,6 +8,7 @@ import com.firpy.repositories.exceptions.DailyTicketLimitReachedException;
 
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Optional;
 
 public class TicketDataAccess
@@ -36,6 +37,11 @@ public class TicketDataAccess
 		Visitor visitor = visitorDataAccess.findVisitorById(visitorId).orElseThrow();
 		registerTicket(purchaseDate, visitor);
 
+	}
+
+	public List<Ticket> findAllTickets()
+	{
+		return ticketRepository.findAll();
 	}
 
 	public Optional<Ticket> findById(TicketId ticketId)

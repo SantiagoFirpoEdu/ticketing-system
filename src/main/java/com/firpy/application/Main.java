@@ -7,11 +7,11 @@ import com.firpy.repositories.CrudRepository;
 import com.firpy.repositories.exceptions.CheckedIllegalArgumentException;
 import com.firpy.repositories.exceptions.DailyTicketLimitReachedException;
 import com.firpy.repositories.impls.TicketDataAccess;
+import com.firpy.repositories.impls.VisitDataAccess;
 import com.firpy.repositories.impls.VisitorDataAccess;
 import org.jetbrains.annotations.NotNull;
 
 import java.time.LocalDate;
-
 public class Main
 {
     public static void main(String[] args)
@@ -23,6 +23,7 @@ public class Main
         CrudRepository<Visit, Long> visitRepository = new CrudRepository<>();
         VisitorDataAccess visitorDataAccess = new VisitorDataAccess(visitorRepository, minorVisitorRepository);
 	    TicketDataAccess ticketDataAccess = new TicketDataAccess(ticketRepository, visitorDataAccess);
+	    VisitDataAccess visitDataAccess = new VisitDataAccess(visitRepository);
 
 	    mockData(attractionRepository, visitorDataAccess, ticketDataAccess, visitRepository);
 
@@ -30,9 +31,17 @@ public class Main
         (
             new RegisterVisitorCommand(visitorDataAccess),
             new RegisterMinorVisitorCommand(visitorDataAccess),
-            new ListVisitors(visitorDataAccess),
+            new ListVisitorsCommand(visitorDataAccess),
+			new ListAttractionsCommand(attractionRepository),
+			new ListTicketsCommand(ticketDataAccess),
+			new ListVisitsCommand(visitDataAccess),
+			new QueryVisitsByDateCommand(visitRepository),
+			new QueryVisitsByTicketIdCommand(visitDataAccess),
             new QueryEarningsForMonthCommand(ticketRepository),
             new QueryEarningsForYearCommand(ticketRepository),
+			new QueryVisitorByTicketIdCommand(ticketDataAccess),
+			new QueryVisitorsByNameCommand(visitorDataAccess),
+			new RegisterVisitCommand(visitDataAccess, ticketDataAccess, attractionRepository),
             new ExitCommand(),
             new HelpCommand(),
             new EmitTicketCommand(ticketDataAccess, visitorDataAccess)
@@ -99,16 +108,26 @@ public class Main
         ticketDataAccess.registerTicket(LocalDate.now(), visitorDataAccess.findVisitorById(2).get());
         ticketDataAccess.registerTicket(LocalDate.now(), visitorDataAccess.findVisitorById(3).get());
         ticketDataAccess.registerTicket(LocalDate.now(), visitorDataAccess.findVisitorById(4).get());
+
+	    ticketDataAccess.registerTicket(LocalDate.now().plusDays(1), visitorDataAccess.findVisitorById(0).get());
+	    ticketDataAccess.registerTicket(LocalDate.now().plusDays(1), visitorDataAccess.findVisitorById(1).get());
+	    ticketDataAccess.registerTicket(LocalDate.now().plusDays(1), visitorDataAccess.findVisitorById(2).get());
+	    ticketDataAccess.registerTicket(LocalDate.now().plusDays(1), visitorDataAccess.findVisitorById(3).get());
+	    ticketDataAccess.registerTicket(LocalDate.now().plusDays(1), visitorDataAccess.findVisitorById(4).get());
     }
 
     private static void mockVisitData(@NotNull CrudRepository<Visit, Long> visitRepository, TicketDataAccess ticketDataAccess, CrudRepository<Attraction, Long> attractionRepository)
     {
-	    Ticket ticket = ticketDataAccess.findById(new TicketId(LocalDate.now(), 0)).get();
-	    Attraction attraction = attractionRepository.findById(0L).get();
-	    visitRepository.save(new Visit(0, ticket, attraction));
-	    visitRepository.save(new Visit(1, ticketDataAccess.findById(new TicketId(LocalDate.now(), 1)).get(), attraction));
-	    visitRepository.save(new Visit(2, ticketDataAccess.findById(new TicketId(LocalDate.now(), 2)).get(), attraction));
-	    visitRepository.save(new Visit(3, ticketDataAccess.findById(new TicketId(LocalDate.now(), 3)).get(), attraction));
-	    visitRepository.save(new Visit(4, ticketDataAccess.findById(new TicketId(LocalDate.now(), 4)).get(), attraction));
+	    visitRepository.save(new Visit(0, ticketDataAccess.findById(new TicketId(LocalDate.now(), 0)).get(), attractionRepository.findById(2L).get()));
+	    visitRepository.save(new Visit(1, ticketDataAccess.findById(new TicketId(LocalDate.now(), 1)).get(), attractionRepository.findById(2L).get()));
+	    visitRepository.save(new Visit(2, ticketDataAccess.findById(new TicketId(LocalDate.now(), 2)).get(), attractionRepository.findById(2L).get()));
+	    visitRepository.save(new Visit(3, ticketDataAccess.findById(new TicketId(LocalDate.now(), 3)).get(), attractionRepository.findById(1L).get()));
+	    visitRepository.save(new Visit(4, ticketDataAccess.findById(new TicketId(LocalDate.now(), 4)).get(), attractionRepository.findById(0L).get()));
+
+	    visitRepository.save(new Visit(5, ticketDataAccess.findById(new TicketId(LocalDate.now().plusDays(1), 0)).get(), attractionRepository.findById(0L).get()));
+	    visitRepository.save(new Visit(6, ticketDataAccess.findById(new TicketId(LocalDate.now().plusDays(1), 1)).get(), attractionRepository.findById(0L).get()));
+	    visitRepository.save(new Visit(7, ticketDataAccess.findById(new TicketId(LocalDate.now().plusDays(1), 2)).get(), attractionRepository.findById(0L).get()));
+	    visitRepository.save(new Visit(8, ticketDataAccess.findById(new TicketId(LocalDate.now().plusDays(1), 3)).get(), attractionRepository.findById(2L).get()));
+	    visitRepository.save(new Visit(9, ticketDataAccess.findById(new TicketId(LocalDate.now().plusDays(1), 4)).get(), attractionRepository.findById(1L).get()));
     }
 }
