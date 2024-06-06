@@ -31,7 +31,7 @@ public class VisitDataAccess
 
 	public List<Visit> findVisitsByTicketId(TicketId ticketId)
 	{
-		return visitRepository.findAll();
+		return visitRepository.findManyByPredicate(visit -> visit.ticket().id().equals(ticketId));
 	}
 
 	private long nextVisitId = 0;
