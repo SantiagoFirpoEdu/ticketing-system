@@ -23,7 +23,7 @@ public class QueryVisitsByDateCommand extends Command
 	}
 
 	@Override
-	public void run(@NotNull String[] args, @NotNull Shell shell) throws CommandException, CommandUsageException
+	public void run(@NotNull String @NotNull [] args, @NotNull Shell shell) throws CommandException, CommandUsageException
 	{
 		LocalDate parsedDate = filterByDateArgument.parse(args);
 		List<Visit> filtered = visitRepository.findManyByPredicate(visit -> visit.ticket().id().purchaseDate().isEqual(parsedDate));

@@ -20,7 +20,7 @@ public class QueryEarningsForYearCommand extends Command
 	}
 
 	@Override
-	public void run(@NotNull String[] args, @NotNull Shell shell) throws CommandException, CommandUsageException
+	public void run(@NotNull String @NotNull [] args, @NotNull Shell shell) throws CommandException, CommandUsageException
 	{
 		int year = yearArgument.parse(args);
 			shell.println("Querying earnings for %d..".formatted(year));

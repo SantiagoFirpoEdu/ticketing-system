@@ -5,6 +5,7 @@ import com.firpy.model.TicketId;
 import com.firpy.model.Visitor;
 import com.firpy.repositories.CrudRepository;
 import com.firpy.repositories.exceptions.DailyTicketLimitReachedException;
+import org.jetbrains.annotations.NotNull;
 
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -31,12 +32,12 @@ public class TicketDataAccess
 		ticketRepository.save(new Ticket(new TicketId(purchaseDate, dailyId), visitor));
 	}
 
-	public List<Ticket> findAllTickets()
+	public @NotNull List<Ticket> findAllTickets()
 	{
 		return ticketRepository.findAll();
 	}
 
-	public Optional<Ticket> findById(TicketId ticketId)
+	public @NotNull Optional<Ticket> findById(TicketId ticketId)
 	{
 		return ticketRepository.findById(ticketId);
 	}

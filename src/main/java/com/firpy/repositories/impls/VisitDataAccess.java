@@ -5,6 +5,7 @@ import com.firpy.model.Ticket;
 import com.firpy.model.TicketId;
 import com.firpy.model.Visit;
 import com.firpy.repositories.CrudRepository;
+import org.jetbrains.annotations.NotNull;
 
 import java.time.LocalDate;
 import java.util.Collection;
@@ -17,19 +18,19 @@ public class VisitDataAccess
 		this.visitRepository = visitRepository;
 	}
 
-	public Visit registerVisit(Ticket ticket, Attraction attraction)
+	public @NotNull Visit registerVisit(Ticket ticket, Attraction attraction)
 	{
 		Visit visit = new Visit(nextVisitId++, ticket, attraction);
 		visitRepository.save(visit);
 		return visit;
 	}
 
-	public List<Visit> findAllVisits()
+	public @NotNull List<Visit> findAllVisits()
 	{
 		return visitRepository.findAll();
 	}
 
-	public List<Visit> findVisitsByTicketId(TicketId ticketId)
+	public @NotNull List<Visit> findVisitsByTicketId(TicketId ticketId)
 	{
 		return visitRepository.findManyByPredicate(visit -> visit.ticket().id().equals(ticketId));
 	}

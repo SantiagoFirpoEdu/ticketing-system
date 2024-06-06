@@ -36,7 +36,7 @@ public class VisitorDataAccess
         return visitor;
     }
 
-    public AdultVisitor registerAdultVisitor(String name, LocalDate dateOfBirth, String phoneNumber)
+    public @NotNull AdultVisitor registerAdultVisitor(String name, LocalDate dateOfBirth, String phoneNumber)
     {
         AdultVisitor adultVisitor = new AdultVisitor(nextId++, name, dateOfBirth, phoneNumber);
         adultVisitorRepository.save(adultVisitor);
@@ -44,7 +44,7 @@ public class VisitorDataAccess
         return adultVisitor;
     }
 
-    public List<Visitor> findAllVisitors()
+    public @NotNull List<Visitor> findAllVisitors()
     {
         ArrayList<Visitor> allVisitors = new ArrayList<>(adultVisitorRepository.findAll());
         allVisitors.addAll(minorVisitorRepository.findAll());
@@ -52,7 +52,7 @@ public class VisitorDataAccess
         return allVisitors;
     }
 
-    public Optional<Visitor> findVisitorById(long id)
+    public @NotNull Optional<Visitor> findVisitorById(long id)
     {
         Optional<Visitor> visitor = adultVisitorRepository.findById(id).map(asVisitor -> asVisitor);
 
@@ -64,7 +64,7 @@ public class VisitorDataAccess
         return visitor;
     }
 
-    public List<Visitor> findManyByPredicate(Predicate<Visitor> predicate)
+    public @NotNull List<Visitor> findManyByPredicate(@NotNull Predicate<Visitor> predicate)
     {
         ArrayList<Visitor> allVisitors = new ArrayList<>(adultVisitorRepository.findManyByPredicate(predicate::test));
         allVisitors.addAll(minorVisitorRepository.findManyByPredicate(predicate::test));

@@ -20,7 +20,7 @@ public class QueryEarningsForMonthCommand extends Command
 	}
 
 	@Override
-	public void run(@NotNull String[] args, @NotNull Shell shell) throws CommandException, CommandUsageException
+	public void run(@NotNull String @NotNull [] args, @NotNull Shell shell) throws CommandException, CommandUsageException
 	{
 		int year = yearArgument.parse(args);
 		int month = monthArgument.parse(args);

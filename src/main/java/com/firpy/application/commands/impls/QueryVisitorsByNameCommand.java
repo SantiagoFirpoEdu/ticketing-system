@@ -18,7 +18,7 @@ public class QueryVisitorsByNameCommand extends Command
 	}
 
 	@Override
-	public void run(@NotNull String[] args, @NotNull Shell shell) throws CommandException, CommandUsageException
+	public void run(@NotNull String @NotNull [] args, @NotNull Shell shell) throws CommandException, CommandUsageException
 	{
 		String nameSubstring = nameSubstringArgumentSchema.parse(args);
 

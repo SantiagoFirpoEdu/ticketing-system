@@ -22,7 +22,7 @@ public class QueryTicketsByDate extends Command
 	}
 
 	@Override
-	public void run(@NotNull String[] args, @NotNull Shell shell) throws CommandException, CommandUsageException
+	public void run(@NotNull String @NotNull [] args, @NotNull Shell shell) throws CommandException, CommandUsageException
 	{
 		LocalDate parsedDate = filterByDateArgument.parse(args);
 		List<Ticket> filtered = ticketRepository.findManyByPredicate(ticket -> ticket.id().purchaseDate().isEqual(parsedDate));

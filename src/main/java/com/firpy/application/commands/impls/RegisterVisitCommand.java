@@ -31,7 +31,7 @@ public class RegisterVisitCommand extends Command
 	}
 
 	@Override
-	public void run(@NotNull String[] args, @NotNull Shell shell) throws CommandException, CommandUsageException
+	public void run(@NotNull String @NotNull [] args, @NotNull Shell shell) throws CommandException, CommandUsageException
 	{
 		LocalDate purchaseDate = purchaseDateArgument.parse(args);
 		long dailyId = dailyIdArgument.parse(args);

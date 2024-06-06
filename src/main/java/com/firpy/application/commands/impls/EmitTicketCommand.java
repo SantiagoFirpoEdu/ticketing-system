@@ -24,7 +24,7 @@ public class EmitTicketCommand extends Command
 	}
 
 	@Override
-	public void run(@NotNull String[] args, @NotNull Shell shell) throws CommandException, CommandUsageException
+	public void run(@NotNull String @NotNull [] args, @NotNull Shell shell) throws CommandException, CommandUsageException
 	{
 		long visitorId = visitorIdArgument.parse(args);
 		LocalDate ticketDate = purchaseDateArgument.parse(args);

@@ -52,10 +52,10 @@ public class Main
         shell.waitForInput();
     }
 
-	private static void mockData(CrudRepository<Attraction, Long> attractionRepository,
-	                             VisitorDataAccess visitorDataAccess,
-								 TicketDataAccess ticketDataAccess,
-	                             CrudRepository<Visit, Long> visitRepository)
+	private static void mockData(@NotNull CrudRepository<Attraction, Long> attractionRepository,
+	                             @NotNull VisitorDataAccess visitorDataAccess,
+	                             @NotNull TicketDataAccess ticketDataAccess,
+	                             @NotNull CrudRepository<Visit, Long> visitRepository)
 	{
 		mockAttractionData(attractionRepository);
 		mockVisitorData(visitorDataAccess);
@@ -102,7 +102,7 @@ public class Main
         visitorDataAccess.registerMinorVisitor("Enzo Silveira", LocalDate.of(2015, 1, 1), 1L);
     }
 
-    private static void mockTicketData(TicketDataAccess ticketDataAccess, VisitorDataAccess visitorDataAccess) throws DailyTicketLimitReachedException
+    private static void mockTicketData(@NotNull TicketDataAccess ticketDataAccess, @NotNull VisitorDataAccess visitorDataAccess) throws DailyTicketLimitReachedException
     {
         ticketDataAccess.registerTicket(LocalDate.now(), visitorDataAccess.findVisitorById(0).get());
         ticketDataAccess.registerTicket(LocalDate.now(), visitorDataAccess.findVisitorById(1).get());
@@ -117,7 +117,7 @@ public class Main
 	    ticketDataAccess.registerTicket(LocalDate.now().plusDays(1), visitorDataAccess.findVisitorById(4).get());
     }
 
-    private static void mockVisitData(@NotNull CrudRepository<Visit, Long> visitRepository, TicketDataAccess ticketDataAccess, CrudRepository<Attraction, Long> attractionRepository)
+    private static void mockVisitData(@NotNull CrudRepository<Visit, Long> visitRepository, @NotNull TicketDataAccess ticketDataAccess, @NotNull CrudRepository<Attraction, Long> attractionRepository)
     {
 	    visitRepository.save(new Visit(0, ticketDataAccess.findById(new TicketId(LocalDate.now(), 0)).get(), attractionRepository.findById(2L).get()));
 	    visitRepository.save(new Visit(1, ticketDataAccess.findById(new TicketId(LocalDate.now(), 1)).get(), attractionRepository.findById(2L).get()));
