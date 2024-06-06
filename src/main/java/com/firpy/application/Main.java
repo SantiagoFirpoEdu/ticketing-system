@@ -102,6 +102,7 @@ public class Main
         visitorDataAccess.registerMinorVisitor("Enzo Silveira", LocalDate.of(2015, 1, 1), 1L);
     }
 
+    @SuppressWarnings("OptionalGetWithoutIsPresent")
     private static void mockTicketData(@NotNull TicketDataAccess ticketDataAccess, @NotNull VisitorDataAccess visitorDataAccess) throws DailyTicketLimitReachedException
     {
         ticketDataAccess.registerTicket(LocalDate.now(), visitorDataAccess.findVisitorById(0).get());
@@ -117,6 +118,7 @@ public class Main
 	    ticketDataAccess.registerTicket(LocalDate.now().plusDays(1), visitorDataAccess.findVisitorById(4).get());
     }
 
+    @SuppressWarnings("OptionalGetWithoutIsPresent")
     private static void mockVisitData(@NotNull CrudRepository<Visit, Long> visitRepository, @NotNull TicketDataAccess ticketDataAccess, @NotNull CrudRepository<Attraction, Long> attractionRepository)
     {
 	    visitRepository.save(new Visit(0, ticketDataAccess.findById(new TicketId(LocalDate.now(), 0)).get(), attractionRepository.findById(2L).get()));
