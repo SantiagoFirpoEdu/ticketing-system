@@ -12,7 +12,6 @@ public class IntArgumentSchema extends ArgumentSchema
 		super(name, description, command);
 	}
 
-	@Override
 	public @NotNull Integer parse(String @NotNull [] args) throws CommandUsageException
 	{
 		checkSize(args);

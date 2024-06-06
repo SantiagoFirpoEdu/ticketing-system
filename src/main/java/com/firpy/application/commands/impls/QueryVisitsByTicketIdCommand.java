@@ -3,7 +3,6 @@ package com.firpy.application.commands.impls;
 import com.firpy.application.commands.Command;
 import com.firpy.application.commands.arguments.impls.LocalDateArgumentSchema;
 import com.firpy.application.commands.arguments.impls.LongArgumentSchema;
-import com.firpy.application.commands.exceptions.CommandException;
 import com.firpy.application.commands.exceptions.CommandUsageException;
 import com.firpy.application.shell.Shell;
 import com.firpy.model.TicketId;
@@ -22,7 +21,7 @@ public class QueryVisitsByTicketIdCommand extends Command
 		addArgumentSchemas(purchaseDateArgument, dailyTicketIdArgument);
 	}
 	@Override
-	public void run(@NotNull String @NotNull [] args, @NotNull Shell shell) throws CommandException, CommandUsageException
+	public void run(@NotNull String @NotNull [] args, @NotNull Shell shell) throws CommandUsageException
 	{
 		LocalDate purchaseDate = purchaseDateArgument.parse(args);
 		long dailyTicketId = dailyTicketIdArgument.parse(args);

@@ -7,8 +7,6 @@ import com.firpy.model.Visit;
 import com.firpy.repositories.CrudRepository;
 import org.jetbrains.annotations.NotNull;
 
-import java.time.LocalDate;
-import java.util.Collection;
 import java.util.List;
 
 public class VisitDataAccess

@@ -26,25 +26,12 @@ public class CrudRepository<EntityType extends Identifiable<IdType>, IdType>
 		return Optional.ofNullable(entities.get(id));
 	}
 
-	public void delete(IdType id)
-	{
-		entities.remove(id);
-	}
-
 	public @NotNull List<EntityType> findManyByPredicate(Predicate<EntityType> predicate)
 	{
 		return entities.values()
 				       .stream()
 				       .filter(predicate)
 				       .toList();
-	}
-
-	public @NotNull Optional<EntityType> findFirstByPredicate(Predicate<EntityType> predicate)
-	{
-		return entities.values()
-				       .stream()
-				       .filter(predicate)
-				       .findFirst();
 	}
 
 

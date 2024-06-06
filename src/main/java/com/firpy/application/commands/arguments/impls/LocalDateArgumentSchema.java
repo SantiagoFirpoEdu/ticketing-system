@@ -2,7 +2,6 @@ package com.firpy.application.commands.arguments.impls;
 
 import com.firpy.application.commands.Command;
 import com.firpy.application.commands.arguments.ArgumentSchema;
-import com.firpy.application.commands.exceptions.CommandException;
 import com.firpy.application.commands.exceptions.CommandUsageException;
 import org.jetbrains.annotations.NotNull;
 
@@ -17,7 +16,6 @@ public class LocalDateArgumentSchema extends ArgumentSchema
         super(name, "%s. Format is %s".formatted(description, DATE_PATTERN), command);
     }
 
-    @Override
     public @NotNull LocalDate parse(String @NotNull [] args) throws CommandUsageException
     {
         checkSize(args);

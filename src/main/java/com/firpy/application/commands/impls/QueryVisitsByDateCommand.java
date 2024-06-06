@@ -2,7 +2,6 @@ package com.firpy.application.commands.impls;
 
 import com.firpy.application.commands.Command;
 import com.firpy.application.commands.arguments.impls.LocalDateArgumentSchema;
-import com.firpy.application.commands.exceptions.CommandException;
 import com.firpy.application.commands.exceptions.CommandUsageException;
 import com.firpy.application.shell.Shell;
 import com.firpy.model.Attraction;
@@ -23,7 +22,7 @@ public class QueryVisitsByDateCommand extends Command
 	}
 
 	@Override
-	public void run(@NotNull String @NotNull [] args, @NotNull Shell shell) throws CommandException, CommandUsageException
+	public void run(@NotNull String @NotNull [] args, @NotNull Shell shell) throws CommandUsageException
 	{
 		LocalDate parsedDate = filterByDateArgument.parse(args);
 		List<Visit> filtered = visitRepository.findManyByPredicate(visit -> visit.ticket().id().purchaseDate().isEqual(parsedDate));
@@ -36,6 +35,7 @@ public class QueryVisitsByDateCommand extends Command
 			attractionVisitCount.put(visit.attraction(), visitCount);
 		}
 
+		@SuppressWarnings("SuspiciousMethodCalls")
 		List<Attraction> attractionsSortedByVisitCount = attractionVisitCount.keySet()
 																			 .stream()
 																			 .sorted(Comparator.comparing(attractionVisitCount::get)

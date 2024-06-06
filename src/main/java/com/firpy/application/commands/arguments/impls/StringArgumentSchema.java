@@ -12,7 +12,6 @@ public class StringArgumentSchema extends ArgumentSchema
 		super(name, description, command);
 	}
 
-	@Override
 	public String parse(String @NotNull [] args) throws CommandUsageException
 	{
 		checkSize(args);

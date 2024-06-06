@@ -3,16 +3,14 @@ package com.firpy.application.commands;
 import com.firpy.application.commands.exceptions.CommandException;
 import com.firpy.application.commands.exceptions.CommandNotFoundException;
 import com.firpy.application.commands.exceptions.CommandUsageException;
-import com.firpy.application.shell.PrettyPrintable;
 import com.firpy.application.shell.Shell;
 import com.firpy.application.shell.ShellColors;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 
-public class CommandRegistry implements PrettyPrintable
+public class CommandRegistry
 {
-	@Override
 	public @NotNull String prettyPrint()
 	{
 		StringBuilder builder = new StringBuilder();

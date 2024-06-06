@@ -3,7 +3,6 @@ package com.firpy.application.commands;
 import com.firpy.application.commands.arguments.ArgumentSchema;
 import com.firpy.application.commands.exceptions.CommandException;
 import com.firpy.application.commands.exceptions.CommandUsageException;
-import com.firpy.application.shell.PrettyPrintable;
 import com.firpy.application.shell.Shell;
 import com.firpy.application.shell.ShellColors;
 import org.jetbrains.annotations.NotNull;
@@ -12,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public abstract class Command implements PrettyPrintable
+public abstract class Command
 {
 	protected Command(String name, String description)
 	{

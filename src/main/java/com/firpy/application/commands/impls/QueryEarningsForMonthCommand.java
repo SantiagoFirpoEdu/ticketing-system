@@ -2,7 +2,6 @@ package com.firpy.application.commands.impls;
 
 import com.firpy.application.commands.Command;
 import com.firpy.application.commands.arguments.impls.IntArgumentSchema;
-import com.firpy.application.commands.exceptions.CommandException;
 import com.firpy.application.commands.exceptions.CommandUsageException;
 import com.firpy.application.shell.Shell;
 import com.firpy.model.Ticket;
@@ -20,7 +19,7 @@ public class QueryEarningsForMonthCommand extends Command
 	}
 
 	@Override
-	public void run(@NotNull String @NotNull [] args, @NotNull Shell shell) throws CommandException, CommandUsageException
+	public void run(@NotNull String @NotNull [] args, @NotNull Shell shell) throws CommandUsageException
 	{
 		int year = yearArgument.parse(args);
 		int month = monthArgument.parse(args);
