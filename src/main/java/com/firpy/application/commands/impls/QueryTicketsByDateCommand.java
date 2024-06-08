@@ -12,9 +12,9 @@ import org.jetbrains.annotations.NotNull;
 import java.time.LocalDate;
 import java.util.List;
 
-public class QueryTicketsByDate extends Command
+public class QueryTicketsByDateCommand extends Command
 {
-	public QueryTicketsByDate(CrudRepository<Ticket, TicketId> ticketRepository)
+	public QueryTicketsByDateCommand(CrudRepository<Ticket, TicketId> ticketRepository)
 	{
 		super("query-tickets-by-date", "query tickets by date.");
 		this.ticketRepository = ticketRepository;

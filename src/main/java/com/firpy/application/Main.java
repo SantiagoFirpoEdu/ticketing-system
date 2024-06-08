@@ -42,7 +42,7 @@ public class Main
 			new QueryVisitsByTicketIdCommand(visitDataAccess),
             new QueryEarningsForMonthCommand(ticketRepository),
             new QueryEarningsForYearCommand(ticketRepository),
-			new QueryTicketsByDate(ticketRepository),
+			new QueryTicketsByDateCommand(ticketRepository),
 			new QueryVisitorByTicketIdCommand(ticketDataAccess),
 			new QueryVisitorsByNameCommand(visitorDataAccess),
 			new GetCurrentUserCommand(userDataAccess),
