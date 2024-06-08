@@ -49,5 +49,5 @@ public class EmitTicketCommand extends Command
 	private final TicketDataAccess ticketDataAccess;
 	private final VisitorDataAccess visitorDataAccess;
 	private final LongArgumentSchema visitorIdArgument = new LongArgumentSchema("visitor-id", "Visitor ID to emit a ticket for.", this);
-	private final LocalDateArgumentSchema purchaseDateArgument = new LocalDateArgumentSchema("purchase-date", "Purchase date of the ticket.", this);
+	private final LocalDateArgumentSchema purchaseDateArgument = new LocalDateArgumentSchema("purchase-date", "Purchase date of the ticket", this);
 }
