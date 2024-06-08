@@ -24,6 +24,7 @@ public class Main
         VisitorDataAccess visitorDataAccess = new VisitorDataAccess(visitorRepository, minorVisitorRepository);
 	    TicketDataAccess ticketDataAccess = new TicketDataAccess(ticketRepository);
 	    VisitDataAccess visitDataAccess = new VisitDataAccess(visitRepository);
+		UserDataAccess userDataAccess = new UserDataAccess();
 
 	    mockData(attractionRepository, visitorDataAccess, ticketDataAccess, visitRepository);
 
@@ -44,6 +45,8 @@ public class Main
 			new QueryTicketsByDate(ticketRepository),
 			new QueryVisitorByTicketIdCommand(ticketDataAccess),
 			new QueryVisitorsByNameCommand(visitorDataAccess),
+			new GetCurrentUserCommand(userDataAccess),
+			new SetCurrentUserCommand(userDataAccess),
             new ExitCommand(),
             new HelpCommand()
         );
